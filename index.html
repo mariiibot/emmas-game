@@ -5,158 +5,114 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Emma's Learning Game">
 <title>Emma's Learning Game</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;height:100vh;width:100vw;overflow:hidden;}
- 
-#splash{position:fixed;inset:0;background:linear-gradient(160deg,#FFE4F3,#EDE9FE,#E0F2FE);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99;text-align:center;padding:20px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;overflow:hidden;height:100vh;width:100vw;}
+#splash{position:fixed;inset:0;background:linear-gradient(160deg,#FFE4F3,#EDE9FE,#E0F2FE);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;z-index:99;}
 #splash h1{font-size:44px;font-weight:900;color:#7C3AED;line-height:1.2;margin:16px 0 8px;}
 #splash h1 span{color:#FF6B9D;}
-#splash p{font-size:22px;color:#7C5C8A;font-weight:700;}
-#splash .emojis{font-size:40px;margin:20px 0;letter-spacing:6px;}
-#startBtn{margin-top:24px;padding:22px 60px;border-radius:60px;border:none;background:linear-gradient(135deg,#FF6B9D,#A855F7);color:#fff;font-size:24px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;box-shadow:0 8px 28px rgba(168,85,247,0.4);}
- 
-#app{position:fixed;inset:0;flex-direction:column;display:none;}
- 
+#splash p{font-size:20px;color:#7C5C8A;font-weight:700;}
+#splash .emojis{font-size:38px;margin:18px 0;letter-spacing:6px;}
+#startBtn{margin-top:24px;padding:22px 60px;border-radius:60px;border:none;background:linear-gradient(135deg,#FF6B9D,#A855F7);color:#fff;font-size:24px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;}
+#app{position:fixed;inset:0;display:none;flex-direction:column;}
 .topbar{background:linear-gradient(135deg,#7C3AED,#C94477);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;padding-top:max(12px,env(safe-area-inset-top));}
 .topbar-title{font-size:18px;font-weight:900;color:#fff;}
 .stars-badge{background:rgba(255,255,255,0.25);border-radius:30px;padding:5px 14px;font-size:17px;font-weight:900;color:#fff;}
- 
 .nav{display:flex;background:#fff;border-bottom:3px solid #EDE9FE;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
 .nav::-webkit-scrollbar{display:none;}
-.nb{flex:1;min-width:64px;padding:9px 3px 7px;border:none;background:none;font-family:-apple-system,sans-serif;font-size:10px;font-weight:800;color:#7C5C8A;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;border-bottom:4px solid transparent;margin-bottom:-3px;}
+.nb{flex:1;min-width:62px;padding:9px 3px 7px;border:none;background:none;font-family:-apple-system,sans-serif;font-size:10px;font-weight:800;color:#7C5C8A;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;border-bottom:4px solid transparent;margin-bottom:-3px;}
 .nb .ic{font-size:20px;}
 .nb.on{color:#7C3AED;border-bottom-color:#7C3AED;}
- 
 .screens{flex:1;overflow:hidden;position:relative;}
-.sc{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px max(12px,env(safe-area-inset-bottom));display:none;}
+.sc{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px;display:none;}
 .sc.on{display:block;}
- 
 .card{background:#fff;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 4px 16px rgba(168,85,247,0.1);border:2px solid #EDE9FE;}
- 
 .instr{display:flex;align-items:center;gap:10px;background:#F5F0FF;border-radius:14px;padding:11px 14px;margin-bottom:12px;cursor:pointer;border:2px solid #DDD6FE;}
-.instr .ii{font-size:24px;flex-shrink:0;}
-.instr .it{font-size:16px;font-weight:800;color:#5B21B6;line-height:1.4;}
-.instr .is{font-size:18px;flex-shrink:0;}
- 
-.lbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:#7C5C8A;margin-bottom:10px;}
-.big{font-size:76px;text-align:center;line-height:1.1;padding:8px 0;}
- 
+.instr .ii{font-size:22px;flex-shrink:0;}
+.instr .it{font-size:15px;font-weight:800;color:#5B21B6;line-height:1.4;flex:1;}
+.big{font-size:72px;text-align:center;line-height:1.1;padding:8px 0;}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
-.opt{padding:18px 8px;border-radius:14px;border:3px solid #EDE9FE;font-size:20px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;min-height:70px;display:flex;align-items:center;justify-content:center;text-align:center;transition:transform 0.1s;user-select:none;}
-.opt:active{transform:scale(0.94);}
+.opt{padding:18px 8px;border-radius:14px;border:3px solid #EDE9FE;font-size:20px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;min-height:70px;display:flex;align-items:center;justify-content:center;text-align:center;}
 .opt.ok{background:#D1FAE5;border-color:#059669;color:#065F46;}
 .opt.no{background:#FEE2E2;border-color:#DC2626;color:#991B1B;}
- 
-.fb{border-radius:14px;padding:13px;margin-top:10px;text-align:center;font-size:17px;font-weight:800;cursor:pointer;line-height:1.4;}
+.fb{border-radius:14px;padding:13px;margin-top:10px;text-align:center;font-size:17px;font-weight:800;line-height:1.4;}
 .fb.ok{background:#D1FAE5;color:#065F46;}
 .fb.no{background:#FEE2E2;color:#991B1B;}
- 
-.nxt{width:100%;padding:16px;border-radius:50px;border:none;background:linear-gradient(135deg,#A855F7,#FF6B9D);color:#fff;font-size:19px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;margin-top:10px;box-shadow:0 6px 18px rgba(168,85,247,0.3);}
- 
-.spkbtn{background:#FEF9C3;border:2px solid #FCD34D;border-radius:30px;padding:10px 18px;font-size:15px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;color:#92400E;display:inline-block;}
- 
+.nxt{width:100%;padding:16px;border-radius:50px;border:none;background:linear-gradient(135deg,#A855F7,#FF6B9D);color:#fff;font-size:19px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;margin-top:10px;}
 .lgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
-.lt{aspect-ratio:1;border-radius:12px;border:3px solid #EDE9FE;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;background:#F5F0FF;color:#7C3AED;font-family:-apple-system,sans-serif;user-select:none;}
-.lt:active{transform:scale(0.9);}
+.lt{aspect-ratio:1;border-radius:12px;border:3px solid #EDE9FE;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;background:#F5F0FF;color:#7C3AED;font-family:-apple-system,sans-serif;}
 .lt.sel{background:#7C3AED;color:#fff;border-color:#5B21B6;}
- 
-.ldet-chars{font-size:68px;font-weight:900;color:#7C3AED;text-align:center;margin-bottom:4px;}
-.ldet-emoji{font-size:52px;text-align:center;margin-bottom:6px;}
-.ldet-hint{font-size:19px;font-weight:700;color:#7C5C8A;text-align:center;margin-bottom:12px;}
- 
+.ldet-chars{font-size:64px;font-weight:900;color:#7C3AED;text-align:center;margin-bottom:4px;}
+.ldet-emoji{font-size:50px;text-align:center;margin-bottom:6px;}
+.ldet-hint{font-size:18px;font-weight:700;color:#7C5C8A;text-align:center;margin-bottom:12px;}
 .sound-row{display:flex;gap:10px;margin-bottom:12px;}
-.snd-btn{flex:1;padding:13px 8px;border-radius:14px;border:3px solid #FCD34D;background:#FEF9C3;color:#92400E;font-size:15px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;text-align:center;}
-.snd-lbl{font-size:11px;font-weight:700;color:#B45309;margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;}
- 
-.examples-lbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:#7C5C8A;margin-bottom:9px;}
+.snd-btn{flex:1;padding:12px 8px;border-radius:14px;border:3px solid #FCD34D;background:#FEF9C3;color:#92400E;font-size:14px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;text-align:center;}
+.snd-lbl{font-size:10px;font-weight:700;color:#B45309;margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;}
 .ex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px;}
 .ex-tile{background:#F5F0FF;border-radius:14px;border:2px solid #DDD6FE;padding:9px 5px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
-.ex-tile:active{transform:scale(0.94);}
-.ex-tile .exe{font-size:32px;}
-.ex-tile .exw{font-size:13px;font-weight:800;color:#5B21B6;text-align:center;}
- 
+.ex-tile .exe{font-size:30px;}
+.ex-tile .exw{font-size:12px;font-weight:800;color:#5B21B6;text-align:center;}
 .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;}
 .rlbl{font-size:14px;font-weight:700;color:#7C5C8A;}
 .rval{font-size:19px;font-weight:900;color:#7C3AED;}
- 
 .dots{display:flex;gap:6px;justify-content:center;margin-bottom:10px;flex-wrap:wrap;}
 .dot{width:10px;height:10px;border-radius:50%;background:#DDD6FE;}
 .dot.dn{background:#7C3AED;}
 .dot.cu{background:#FF6B9D;transform:scale(1.3);}
- 
-/* ===== STORY SCREEN ===== */
 .story-selector{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:12px;}
 .story-selector::-webkit-scrollbar{display:none;}
-.story-tab{flex-shrink:0;padding:8px 16px;border-radius:20px;border:2px solid #DDD6FE;font-size:13px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;}
+.story-tab{flex-shrink:0;padding:8px 14px;border-radius:20px;border:2px solid #DDD6FE;font-size:12px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;}
 .story-tab.on{background:#7C3AED;color:#fff;border-color:#5B21B6;}
- 
-.story-book{background:#fff;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 4px 16px rgba(168,85,247,0.1);border:2px solid #EDE9FE;}
-.story-scene{font-size:72px;text-align:center;padding:10px 0 6px;line-height:1;}
-.story-title{font-size:22px;font-weight:900;color:#7C3AED;text-align:center;margin-bottom:14px;}
- 
-.story-text-wrap{background:#FFF5FB;border-radius:14px;padding:14px;border-left:4px solid #FF6B9D;margin-bottom:12px;cursor:pointer;}
-.story-word{font-size:22px;font-weight:800;color:#2D1B4E;display:inline;cursor:pointer;}
-.story-word.hi{background:#FCD34D;border-radius:6px;padding:2px 4px;color:#92400E;}
-.story-word-space{font-size:22px;display:inline;}
- 
+.story-scene{font-size:70px;text-align:center;padding:10px 0 6px;line-height:1;}
+.story-title{font-size:20px;font-weight:900;color:#7C3AED;text-align:center;margin-bottom:12px;}
+.story-text-wrap{background:#FFF5FB;border-radius:14px;padding:14px;border-left:4px solid #FF6B9D;margin-bottom:12px;}
+.sw{font-size:22px;font-weight:800;color:#2D1B4E;display:inline;}
+.sw.hi{background:#FCD34D;border-radius:6px;padding:2px 4px;color:#92400E;}
 .story-controls{display:flex;gap:10px;margin-bottom:12px;}
 .ctrl-btn{flex:1;padding:13px 8px;border-radius:14px;border:2px solid #DDD6FE;font-size:15px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;text-align:center;}
-.ctrl-btn:active{transform:scale(0.95);}
 .ctrl-btn.playing{background:#7C3AED;color:#fff;border-color:#5B21B6;}
- 
 .story-q-box{background:#FFF5FB;border-radius:14px;padding:14px;border:2px solid #FFD6E7;margin-bottom:8px;}
-.story-q-label{font-size:13px;font-weight:800;color:#BE185D;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px;}
-.story-q-text{font-size:18px;font-weight:800;color:#2D1B4E;}
- 
-/* ===== SCIENCE SCREEN ===== */
+.story-q-label{font-size:12px;font-weight:800;color:#BE185D;margin-bottom:4px;text-transform:uppercase;}
+.story-q-text{font-size:17px;font-weight:800;color:#2D1B4E;}
 .sci-cats{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:12px;}
 .sci-cats::-webkit-scrollbar{display:none;}
-.sci-cat{flex-shrink:0;padding:8px 16px;border-radius:20px;border:2px solid #DDD6FE;font-size:13px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;}
+.sci-cat{flex-shrink:0;padding:8px 14px;border-radius:20px;border:2px solid #DDD6FE;font-size:12px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;}
 .sci-cat.on{background:#059669;color:#fff;border-color:#047857;}
- 
 .sci-card{background:#fff;border-radius:18px;padding:14px;margin-bottom:10px;box-shadow:0 3px 12px rgba(5,150,105,0.1);border:2px solid #D1FAE5;cursor:pointer;}
-.sci-card:active{transform:scale(0.98);}
-.sci-emoji{font-size:52px;text-align:center;padding:6px 0;}
-.sci-name{font-size:20px;font-weight:900;color:#065F46;text-align:center;margin-bottom:4px;}
-.sci-fact{font-size:15px;font-weight:700;color:#374151;line-height:1.5;text-align:center;margin-bottom:10px;}
-.sci-spk{width:100%;padding:11px;border-radius:30px;border:none;background:#D1FAE5;color:#065F46;font-size:15px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;}
- 
+.sci-emoji{font-size:50px;text-align:center;padding:6px 0;}
+.sci-name{font-size:19px;font-weight:900;color:#065F46;text-align:center;margin-bottom:4px;}
+.sci-fact{font-size:14px;font-weight:700;color:#374151;line-height:1.5;text-align:center;margin-bottom:10px;}
+.sci-spk{width:100%;padding:10px;border-radius:30px;border:none;background:#D1FAE5;color:#065F46;font-size:14px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;}
 .sci-quiz-wrap{background:#fff;border-radius:20px;padding:14px;margin-top:4px;box-shadow:0 4px 16px rgba(5,150,105,0.1);border:2px solid #D1FAE5;}
 </style>
 </head>
 <body>
- 
 <div id="splash">
-  <div style="font-size:76px;">🌟</div>
+  <div style="font-size:76px">🌟</div>
   <h1>Emma's<br><span>Learning Game</span></h1>
   <p>Let's learn and have fun!</p>
   <div class="emojis">🐶📚🌍🔢🎵🌿</div>
-  <button id="startBtn" onclick="startApp()">▶ Let's Play!</button>
+  <button id="startBtn">▶ Let's Play!</button>
 </div>
- 
 <div id="app">
   <div class="topbar">
     <div class="topbar-title">Emma's Learning Game 🌟</div>
     <div class="stars-badge">⭐ <span id="sc">0</span></div>
   </div>
   <div class="nav">
-    <button class="nb on" id="nb-letters" onclick="go('letters')"><span class="ic">🔤</span>Letters</button>
-    <button class="nb" id="nb-phonics" onclick="go('phonics')"><span class="ic">🔊</span>Phonics</button>
-    <button class="nb" id="nb-numbers" onclick="go('numbers')"><span class="ic">🔢</span>Numbers</button>
-    <button class="nb" id="nb-words" onclick="go('words')"><span class="ic">📖</span>Words</button>
-    <button class="nb" id="nb-stories" onclick="go('stories')"><span class="ic">📚</span>Stories</button>
-    <button class="nb" id="nb-science" onclick="go('science')"><span class="ic">🌍</span>Science</button>
+    <button class="nb on" id="nb-letters"><span class="ic">🔤</span>Letters</button>
+    <button class="nb" id="nb-phonics"><span class="ic">🔊</span>Phonics</button>
+    <button class="nb" id="nb-numbers"><span class="ic">🔢</span>Numbers</button>
+    <button class="nb" id="nb-words"><span class="ic">📖</span>Words</button>
+    <button class="nb" id="nb-stories"><span class="ic">📚</span>Stories</button>
+    <button class="nb" id="nb-science"><span class="ic">🌍</span>Science</button>
   </div>
   <div class="screens">
- 
-    <!-- LETTERS -->
     <div id="s-letters" class="sc on">
-      <div class="instr" id="instr-letters"><span class="ii">👆</span><span class="it">Tap any letter to learn it!</span><span class="is">🔊</span></div>
+      <div class="instr" id="instr-letters"><span class="ii">👆</span><span class="it">Tap any letter to learn it!</span><span style="font-size:18px">🔊</span></div>
       <div class="card"><div class="lgrid" id="lgrid"></div></div>
-      <div class="card" id="ldet" style="display:none;">
+      <div class="card" id="ldet" style="display:none">
         <div class="ldet-chars" id="lc"></div>
         <div class="ldet-emoji" id="le"></div>
         <div class="ldet-hint" id="lh"></div>
@@ -164,124 +120,109 @@ body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;heigh
           <button class="snd-btn" id="sndNameBtn"><div class="snd-lbl">Letter name</div><div id="sndNameTxt"></div></button>
           <button class="snd-btn" id="sndSoundBtn"><div class="snd-lbl">Letter sound</div><div id="sndSoundTxt"></div></button>
         </div>
-        <div class="examples-lbl">🌟 Words that start with this letter</div>
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:#7C5C8A;margin-bottom:9px">🌟 Words that start with this letter</div>
         <div class="ex-grid" id="exGrid"></div>
       </div>
     </div>
- 
-    <!-- PHONICS -->
     <div id="s-phonics" class="sc">
       <div class="row"><span class="rlbl">Phonics Quiz</span><span class="rval" id="ps">⭐ 0</span></div>
       <div class="dots" id="pd"></div>
       <div class="card">
-        <div class="instr" id="instr-phonics"><span class="ii">👂</span><span class="it">What sound does this letter make? Tap the right answer!</span><span class="is">🔊</span></div>
+        <div class="instr" id="instr-phonics"><span class="ii">👂</span><span class="it">What sound does this letter make? Tap the right answer!</span><span style="font-size:18px">🔊</span></div>
         <div class="big" id="pl"></div>
         <div class="opts" id="po"></div>
         <div id="pf"></div>
-        <button class="nxt" id="pn" style="display:none;">Next ➡️</button>
+        <button class="nxt" id="pn" style="display:none">Next ➡️</button>
       </div>
     </div>
- 
-    <!-- NUMBERS -->
     <div id="s-numbers" class="sc">
       <div class="row"><span class="rlbl">Counting Game</span><span class="rval" id="ns">⭐ 0</span></div>
       <div class="dots" id="nd"></div>
       <div class="card">
-        <div class="instr" id="instr-numbers"><span class="ii">🔢</span><span class="it">Count the pictures! Tap the right number!</span><span class="is">🔊</span></div>
+        <div class="instr" id="instr-numbers"><span class="ii">🔢</span><span class="it">Count the pictures! Tap the right number!</span><span style="font-size:18px">🔊</span></div>
         <div class="big" id="nd2"></div>
         <div class="opts" id="no"></div>
         <div id="nf"></div>
-        <button class="nxt" id="nn" style="display:none;">Next ➡️</button>
+        <button class="nxt" id="nn" style="display:none">Next ➡️</button>
       </div>
     </div>
- 
-    <!-- WORDS -->
     <div id="s-words" class="sc">
       <div class="row"><span class="rlbl">Sight Words</span><span class="rval" id="ws">⭐ 0</span></div>
       <div class="dots" id="wd"></div>
       <div class="card">
-        <div class="instr" id="instr-words"><span class="ii">🖼️</span><span class="it">Look at the picture! Tap the word that matches!</span><span class="is">🔊</span></div>
+        <div class="instr" id="instr-words"><span class="ii">🖼️</span><span class="it">Look at the picture! Tap the word that matches!</span><span style="font-size:18px">🔊</span></div>
         <div class="big" id="we"></div>
         <div class="opts" id="wo"></div>
         <div id="wf"></div>
-        <button class="nxt" id="wn" style="display:none;">Next ➡️</button>
+        <button class="nxt" id="wn" style="display:none">Next ➡️</button>
       </div>
     </div>
- 
-    <!-- STORIES -->
     <div id="s-stories" class="sc">
-      <div class="instr" id="instr-stories"><span class="ii">📖</span><span class="it">Pick a story! Then press Play to hear it!</span><span class="is">🔊</span></div>
-      <div class="story-selector" id="storySelector"></div>
-      <div class="story-book" id="storyBook">
-        <div class="story-scene" id="storyScene"></div>
-        <div class="story-title" id="storyTitle"></div>
-        <div class="story-text-wrap" id="storyTextWrap"></div>
+      <div class="instr" id="instr-stories"><span class="ii">📖</span><span class="it">Pick a story! Press Play to hear it!</span><span style="font-size:18px">🔊</span></div>
+      <div class="story-selector" id="storySel"></div>
+      <div class="card">
+        <div class="story-scene" id="stScene"></div>
+        <div class="story-title" id="stTitle"></div>
+        <div class="story-text-wrap" id="stText"></div>
         <div class="story-controls">
-          <button class="ctrl-btn" id="storyPlayBtn">▶ Read to me!</button>
-          <button class="ctrl-btn" id="storyStopBtn">⏹ Stop</button>
+          <button class="ctrl-btn" id="stPlay">▶ Read to me!</button>
+          <button class="ctrl-btn" id="stStop">⏹ Stop</button>
         </div>
-        <div class="story-q-box" id="storyQBox" style="display:none;">
+        <div class="story-q-box" id="stQBox" style="display:none">
           <div class="story-q-label">❓ Question</div>
-          <div class="story-q-text" id="storyQText"></div>
+          <div class="story-q-text" id="stQ"></div>
         </div>
-        <div class="opts" id="storyOpts" style="display:none;"></div>
-        <div id="storyFb"></div>
-        <button class="nxt" id="storyNext" style="display:none;">Next Story ➡️</button>
+        <div class="opts" id="stOpts" style="display:none"></div>
+        <div id="stFb"></div>
+        <button class="nxt" id="stNext" style="display:none">Next Story ➡️</button>
       </div>
     </div>
- 
-    <!-- SCIENCE -->
     <div id="s-science" class="sc">
-      <div class="instr" id="instr-science"><span class="ii">🔬</span><span class="it">Pick a topic! Tap any card to learn and hear about it!</span><span class="is">🔊</span></div>
+      <div class="instr" id="instr-science"><span class="ii">🔬</span><span class="it">Pick a topic! Tap any card to hear about it!</span><span style="font-size:18px">🔊</span></div>
       <div class="sci-cats" id="sciCats"></div>
       <div id="sciCards"></div>
-      <div class="sci-quiz-wrap" id="sciQuizWrap" style="display:none;">
-        <div class="row"><span class="rlbl">Science Quiz</span><span class="rval" id="sciQScore">⭐ 0</span></div>
-        <div class="dots" id="sciQDots"></div>
-        <div class="instr" id="instr-sciquiz" style="margin-bottom:10px;"><span class="ii">🧪</span><span class="it">Science question! Tap the right answer!</span><span class="is">🔊</span></div>
-        <div class="big" id="sciQEmoji"></div>
-        <div style="font-size:17px;font-weight:800;color:#065F46;text-align:center;margin-bottom:8px;" id="sciQText"></div>
-        <div class="opts" id="sciQOpts"></div>
-        <div id="sciQFb"></div>
-        <button class="nxt" id="sciQNext" style="display:none;">Next ➡️</button>
+      <div class="sci-quiz-wrap" id="sciQWrap" style="display:none">
+        <div class="row"><span class="rlbl">Science Quiz</span><span class="rval" id="sciQS">⭐ 0</span></div>
+        <div class="dots" id="sciQD"></div>
+        <div class="instr" id="instr-sciquiz" style="margin-bottom:10px"><span class="ii">🧪</span><span class="it">Science question! Tap the right answer!</span><span style="font-size:18px">🔊</span></div>
+        <div class="big" id="sciQE"></div>
+        <div style="font-size:16px;font-weight:800;color:#065F46;text-align:center;margin-bottom:8px" id="sciQT"></div>
+        <div class="opts" id="sciQO"></div>
+        <div id="sciQF"></div>
+        <button class="nxt" id="sciQN" style="display:none">Next ➡️</button>
       </div>
     </div>
- 
   </div>
 </div>
- 
 <script>
-// ===== LETTERS DATA =====
 var LETS=[
-  {l:'A',lc:'a',sound:'AH',e:'🍎',w:'Apple',ex:[{e:'🍊',w:'Apricot'},{e:'🐜',w:'Ant'},{e:'✈️',w:'Airplane'},{e:'⚓',w:'Anchor'},{e:'🐊',w:'Alligator'},{e:'🍏',w:'Avocado'}]},
-  {l:'B',lc:'b',sound:'BUH',e:'🍌',w:'Banana',ex:[{e:'🎈',w:'Balloon'},{e:'🐻',w:'Bear'},{e:'🚲',w:'Bicycle'},{e:'🦋',w:'Butterfly'},{e:'📚',w:'Book'},{e:'🏀',w:'Ball'}]},
+  {l:'A',lc:'a',sound:'AH',e:'🍎',w:'Apple',ex:[{e:'🐜',w:'Ant'},{e:'✈️',w:'Airplane'},{e:'🐊',w:'Alligator'},{e:'⚓',w:'Anchor'},{e:'🍏',w:'Avocado'},{e:'🍊',w:'Apricot'}]},
+  {l:'B',lc:'b',sound:'BUH',e:'🍌',w:'Banana',ex:[{e:'🎈',w:'Balloon'},{e:'🐻',w:'Bear'},{e:'🦋',w:'Butterfly'},{e:'📚',w:'Book'},{e:'🏀',w:'Ball'},{e:'🚲',w:'Bicycle'}]},
   {l:'C',lc:'c',sound:'KUH',e:'🐱',w:'Cat',ex:[{e:'🍰',w:'Cake'},{e:'🐄',w:'Cow'},{e:'🌽',w:'Corn'},{e:'🦀',w:'Crab'},{e:'🍪',w:'Cookie'},{e:'☁️',w:'Cloud'}]},
-  {l:'D',lc:'d',sound:'DUH',e:'🐶',w:'Dog',ex:[{e:'🦆',w:'Duck'},{e:'🎲',w:'Dice'},{e:'💎',w:'Diamond'},{e:'🐬',w:'Dolphin'},{e:'🥁',w:'Drum'},{e:'🍩',w:'Donut'}]},
-  {l:'E',lc:'e',sound:'EH',e:'🥚',w:'Egg',ex:[{e:'🦅',w:'Eagle'},{e:'🌍',w:'Earth'},{e:'🧝',w:'Elf'},{e:'✉️',w:'Envelope'},{e:'🍆',w:'Eggplant'},{e:'🐘',w:'Elephant'}]},
-  {l:'F',lc:'f',sound:'FFF',e:'🐸',w:'Frog',ex:[{e:'🐟',w:'Fish'},{e:'🌸',w:'Flower'},{e:'🦊',w:'Fox'},{e:'🍟',w:'Fries'},{e:'🪶',w:'Feather'},{e:'🎡',w:'Ferris Wheel'}]},
+  {l:'D',lc:'d',sound:'DUH',e:'🐶',w:'Dog',ex:[{e:'🦆',w:'Duck'},{e:'💎',w:'Diamond'},{e:'🐬',w:'Dolphin'},{e:'🥁',w:'Drum'},{e:'🍩',w:'Donut'},{e:'🎲',w:'Dice'}]},
+  {l:'E',lc:'e',sound:'EH',e:'🥚',w:'Egg',ex:[{e:'🦅',w:'Eagle'},{e:'🌍',w:'Earth'},{e:'🐘',w:'Elephant'},{e:'✉️',w:'Envelope'},{e:'🍆',w:'Eggplant'},{e:'🧝',w:'Elf'}]},
+  {l:'F',lc:'f',sound:'FFF',e:'🐸',w:'Frog',ex:[{e:'🐟',w:'Fish'},{e:'🌸',w:'Flower'},{e:'🦊',w:'Fox'},{e:'🪶',w:'Feather'},{e:'🍟',w:'Fries'},{e:'🎡',w:'Ferris Wheel'}]},
   {l:'G',lc:'g',sound:'GUH',e:'🍇',w:'Grapes',ex:[{e:'🦒',w:'Giraffe'},{e:'🐐',w:'Goat'},{e:'🎸',w:'Guitar'},{e:'🌿',w:'Grass'},{e:'🍬',w:'Gummy'},{e:'🧤',w:'Glove'}]},
-  {l:'H',lc:'h',sound:'HUH',e:'🏠',w:'House',ex:[{e:'🐎',w:'Horse'},{e:'🍯',w:'Honey'},{e:'🦔',w:'Hedgehog'},{e:'🎩',w:'Hat'},{e:'🌺',w:'Hibiscus'},{e:'🍔',w:'Hamburger'}]},
-  {l:'I',lc:'i',sound:'IH',e:'🍦',w:'Ice Cream',ex:[{e:'🏝️',w:'Island'},{e:'🦎',w:'Iguana'},{e:'🧊',w:'Ice'},{e:'✉️',w:'Invite'},{e:'🌺',w:'Iris'},{e:'🪲',w:'Insect'}]},
+  {l:'H',lc:'h',sound:'HUH',e:'🏠',w:'House',ex:[{e:'🐎',w:'Horse'},{e:'🍯',w:'Honey'},{e:'🎩',w:'Hat'},{e:'🍔',w:'Hamburger'},{e:'🦔',w:'Hedgehog'},{e:'🌺',w:'Hibiscus'}]},
+  {l:'I',lc:'i',sound:'IH',e:'🍦',w:'Ice Cream',ex:[{e:'🏝️',w:'Island'},{e:'🦎',w:'Iguana'},{e:'🧊',w:'Ice'},{e:'🪲',w:'Insect'},{e:'🌺',w:'Iris'},{e:'✉️',w:'Invite'}]},
   {l:'J',lc:'j',sound:'JUH',e:'🃏',w:'Jump',ex:[{e:'🍊',w:'Juice'},{e:'👖',w:'Jeans'},{e:'🪼',w:'Jellyfish'},{e:'🫙',w:'Jar'},{e:'🎷',w:'Jazz'},{e:'🦁',w:'Jaguar'}]},
-  {l:'K',lc:'k',sound:'KUH',e:'🪁',w:'Kite',ex:[{e:'🦘',w:'Kangaroo'},{e:'🔑',w:'Key'},{e:'👑',w:'King'},{e:'🥝',w:'Kiwi'},{e:'🐨',w:'Koala'},{e:'🔪',w:'Knife'}]},
+  {l:'K',lc:'k',sound:'KUH',e:'🪁',w:'Kite',ex:[{e:'🦘',w:'Kangaroo'},{e:'🔑',w:'Key'},{e:'👑',w:'King'},{e:'🥝',w:'Kiwi'},{e:'🐨',w:'Koala'},{e:'🪕',w:'Kalimba'}]},
   {l:'L',lc:'l',sound:'LUH',e:'🦁',w:'Lion',ex:[{e:'🍋',w:'Lemon'},{e:'🦎',w:'Lizard'},{e:'🌸',w:'Lily'},{e:'🦞',w:'Lobster'},{e:'🔦',w:'Lantern'},{e:'🍭',w:'Lollipop'}]},
-  {l:'M',lc:'m',sound:'MMM',e:'🌙',w:'Moon',ex:[{e:'🐒',w:'Monkey'},{e:'🍄',w:'Mushroom'},{e:'🧲',w:'Magnet'},{e:'🗺️',w:'Map'},{e:'🎤',w:'Microphone'},{e:'🦟',w:'Mosquito'}]},
-  {l:'N',lc:'n',sound:'NNN',e:'👃',w:'Nose',ex:[{e:'🥜',w:'Nut'},{e:'📰',w:'Newspaper'},{e:'🌙',w:'Night'},{e:'🪺',w:'Nest'},{e:'🎶',w:'Notes'},{e:'🧲',w:'Nail'}]},
-  {l:'O',lc:'o',sound:'AH',e:'🐙',w:'Octopus',ex:[{e:'🦦',w:'Otter'},{e:'🦉',w:'Owl'},{e:'🍊',w:'Orange'},{e:'🐂',w:'Ox'},{e:'🌊',w:'Ocean'},{e:'🫒',w:'Olive'}]},
+  {l:'M',lc:'m',sound:'MMM',e:'🌙',w:'Moon',ex:[{e:'🐒',w:'Monkey'},{e:'🍄',w:'Mushroom'},{e:'🧲',w:'Magnet'},{e:'🗺️',w:'Map'},{e:'🎤',w:'Microphone'},{e:'🎵',w:'Music'}]},
+  {l:'N',lc:'n',sound:'NNN',e:'👃',w:'Nose',ex:[{e:'🥜',w:'Nut'},{e:'🌙',w:'Night'},{e:'🪺',w:'Nest'},{e:'🎶',w:'Notes'},{e:'📰',w:'Newspaper'},{e:'🧲',w:'Nail'}]},
+  {l:'O',lc:'o',sound:'AH',e:'🐙',w:'Octopus',ex:[{e:'🦦',w:'Otter'},{e:'🦉',w:'Owl'},{e:'🍊',w:'Orange'},{e:'🌊',w:'Ocean'},{e:'🫒',w:'Olive'},{e:'🐂',w:'Ox'}]},
   {l:'P',lc:'p',sound:'PUH',e:'🐷',w:'Pig',ex:[{e:'🍕',w:'Pizza'},{e:'🐼',w:'Panda'},{e:'✏️',w:'Pencil'},{e:'🍑',w:'Peach'},{e:'🦜',w:'Parrot'},{e:'🎃',w:'Pumpkin'}]},
   {l:'Q',lc:'q',sound:'KWUH',e:'👸',w:'Queen',ex:[{e:'❓',w:'Question'},{e:'🪶',w:'Quill'},{e:'🤫',w:'Quiet'},{e:'🦆',w:'Quack'},{e:'🏰',w:'Quest'},{e:'🎯',w:'Quiz'}]},
   {l:'R',lc:'r',sound:'RRR',e:'🌈',w:'Rainbow',ex:[{e:'🐰',w:'Rabbit'},{e:'🚀',w:'Rocket'},{e:'🌹',w:'Rose'},{e:'🦏',w:'Rhino'},{e:'🤖',w:'Robot'},{e:'🍓',w:'Raspberry'}]},
   {l:'S',lc:'s',sound:'SSS',e:'⭐',w:'Star',ex:[{e:'🐍',w:'Snake'},{e:'🌻',w:'Sunflower'},{e:'🦈',w:'Shark'},{e:'🍓',w:'Strawberry'},{e:'🥄',w:'Spoon'},{e:'🛸',w:'Spaceship'}]},
   {l:'T',lc:'t',sound:'TUH',e:'🐢',w:'Turtle',ex:[{e:'🐯',w:'Tiger'},{e:'🌮',w:'Taco'},{e:'🏆',w:'Trophy'},{e:'🎺',w:'Trumpet'},{e:'🦃',w:'Turkey'},{e:'🍅',w:'Tomato'}]},
-  {l:'U',lc:'u',sound:'UH',e:'☂️',w:'Umbrella',ex:[{e:'🦄',w:'Unicorn'},{e:'⬆️',w:'Up'},{e:'🧲',w:'Unique'},{e:'🎻',w:'Ukulele'},{e:'🫙',w:'Urn'},{e:'🌂',w:'Under'}]},
-  {l:'V',lc:'v',sound:'VVV',e:'🎻',w:'Violin',ex:[{e:'🌋',w:'Volcano'},{e:'🧛',w:'Vampire'},{e:'🚐',w:'Van'},{e:'💜',w:'Violet'},{e:'🌿',w:'Vine'},{e:'🏐',w:'Volleyball'}]},
-  {l:'W',lc:'w',sound:'WUH',e:'🌊',w:'Wave',ex:[{e:'🐋',w:'Whale'},{e:'🍉',w:'Watermelon'},{e:'🕷️',w:'Web'},{e:'🐺',w:'Wolf'},{e:'⌚',w:'Watch'},{e:'🪄',w:'Wand'}]},
+  {l:'U',lc:'u',sound:'UH',e:'☂️',w:'Umbrella',ex:[{e:'🦄',w:'Unicorn'},{e:'⬆️',w:'Up'},{e:'🎻',w:'Ukulele'},{e:'🫙',w:'Urn'},{e:'🌂',w:'Under'},{e:'🧲',w:'Unique'}]},
+  {l:'V',lc:'v',sound:'VVV',e:'🎻',w:'Violin',ex:[{e:'🌋',w:'Volcano'},{e:'🚐',w:'Van'},{e:'💜',w:'Violet'},{e:'🌿',w:'Vine'},{e:'🏐',w:'Volleyball'},{e:'🧛',w:'Vampire'}]},
+  {l:'W',lc:'w',sound:'WUH',e:'🌊',w:'Wave',ex:[{e:'🐋',w:'Whale'},{e:'🍉',w:'Watermelon'},{e:'🐺',w:'Wolf'},{e:'⌚',w:'Watch'},{e:'🪄',w:'Wand'},{e:'🕷️',w:'Web'}]},
   {l:'X',lc:'x',sound:'KS',e:'🎸',w:'Xylophone',ex:[{e:'🩻',w:'X-Ray'},{e:'❌',w:'X mark'},{e:'🎄',w:'Xmas'},{e:'📦',w:'Xbox'},{e:'⚔️',w:'Xena'},{e:'🔭',w:'Xenon'}]},
   {l:'Y',lc:'y',sound:'YUH',e:'🪀',w:'Yo-yo',ex:[{e:'🧶',w:'Yarn'},{e:'😋',w:'Yummy'},{e:'🥛',w:'Yogurt'},{e:'🌿',w:'Yam'},{e:'⛵',w:'Yacht'},{e:'🌾',w:'Yellow'}]},
   {l:'Z',lc:'z',sound:'ZZZ',e:'🦓',w:'Zebra',ex:[{e:'⚡',w:'Zap'},{e:'🤐',w:'Zip'},{e:'🌿',w:'Zucchini'},{e:'0️⃣',w:'Zero'},{e:'🎯',w:'Zoom'},{e:'🏙️',w:'Zoo'}]}
 ];
- 
-// ===== PHONICS =====
 var PHO=[
   {l:'A',s:'AH',o:['AH','EE','OH','UH'],a:0,ex:'Apple'},
   {l:'B',s:'BUH',o:['FUH','BUH','PUH','TUH'],a:1,ex:'Ball'},
@@ -296,698 +237,140 @@ var PHO=[
   {l:'T',s:'TUH',o:['DUH','BUH','TUH','KUH'],a:2,ex:'Tiger'},
   {l:'R',s:'RRR',o:['LLL','RRR','WWW','YYY'],a:1,ex:'Rain'}
 ];
- 
-// ===== NUMBERS =====
 var NUMS=[
-  {e:'⭐',n:1,o:[1,2,3,4]},
-  {e:'🍎🍎',n:2,o:[1,2,3,4]},
-  {e:'🐱🐱🐱',n:3,o:[2,3,4,5]},
-  {e:'⭐⭐⭐⭐',n:4,o:[3,4,5,6]},
-  {e:'🌸🌸🌸🌸🌸',n:5,o:[4,5,6,7]},
-  {e:'🦋🦋🦋🦋🦋🦋',n:6,o:[5,6,7,8]},
-  {e:'🐸🐸🐸🐸🐸🐸🐸',n:7,o:[6,7,8,9]},
-  {e:'🍌🍌🍌🍌🍌🍌🍌🍌',n:8,o:[7,8,9,10]},
-  {e:'⭐⭐⭐⭐⭐⭐⭐⭐⭐',n:9,o:[8,9,10,11]},
+  {e:'⭐',n:1,o:[1,2,3,4]},{e:'🍎🍎',n:2,o:[1,2,3,4]},{e:'🐱🐱🐱',n:3,o:[2,3,4,5]},
+  {e:'⭐⭐⭐⭐',n:4,o:[3,4,5,6]},{e:'🌸🌸🌸🌸🌸',n:5,o:[4,5,6,7]},
+  {e:'🦋🦋🦋🦋🦋🦋',n:6,o:[5,6,7,8]},{e:'🐸🐸🐸🐸🐸🐸🐸',n:7,o:[6,7,8,9]},
+  {e:'🍌🍌🍌🍌🍌🍌🍌🍌',n:8,o:[7,8,9,10]},{e:'⭐⭐⭐⭐⭐⭐⭐⭐⭐',n:9,o:[8,9,10,11]},
   {e:'🌷🌷🌷🌷🌷🌷🌷🌷🌷🌷',n:10,o:[9,10,11,12]}
 ];
- 
-// ===== SIGHT WORDS =====
 var WDS=[
-  {e:'🐶',w:'dog',o:['dog','cat','bird','fish']},
-  {e:'🌞',w:'sun',o:['moon','sun','star','sky']},
-  {e:'🐟',w:'fish',o:['duck','frog','fish','bug']},
-  {e:'🌳',w:'tree',o:['tree','bush','leaf','seed']},
-  {e:'🏠',w:'home',o:['door','home','room','yard']},
-  {e:'🐱',w:'cat',o:['cat','rat','hat','bat']},
-  {e:'🚗',w:'car',o:['bus','car','van','boat']},
-  {e:'📚',w:'book',o:['book','page','read','word']},
-  {e:'🌙',w:'moon',o:['star','moon','sun','sky']},
-  {e:'🍎',w:'apple',o:['apple','grape','mango','peach']}
+  {e:'🐶',w:'dog',o:['dog','cat','bird','fish']},{e:'🌞',w:'sun',o:['moon','sun','star','sky']},
+  {e:'🐟',w:'fish',o:['duck','frog','fish','bug']},{e:'🌳',w:'tree',o:['tree','bush','leaf','seed']},
+  {e:'🏠',w:'home',o:['door','home','room','yard']},{e:'🐱',w:'cat',o:['cat','rat','hat','bat']},
+  {e:'🚗',w:'car',o:['bus','car','van','boat']},{e:'📚',w:'book',o:['book','page','read','word']},
+  {e:'🌙',w:'moon',o:['star','moon','sun','sky']},{e:'🍎',w:'apple',o:['apple','grape','mango','peach']}
 ];
- 
-// ===== STORIES =====
-// scenes: array of {emoji, text} — each scene has an emoji picture and a sentence
-var STORIES=[
-  {
-    title:'The Little Red Apple',
-    icon:'🍎',
-    scenes:[
-      {e:'🌳',t:'There is a big tree.'},
-      {e:'🍎',t:'A red apple grows on the tree.'},
-      {e:'🐛',t:'A small bug sits on the apple.'},
-      {e:'👧',t:'Emma sees the apple.'},
-      {e:'😋',t:'She picks it and eats it. Yum!'}
-    ],
-    q:'What color is the apple?',
-    o:['Blue','Red','Yellow','Green'],
-    a:1
-  },
-  {
-    title:'The Big Sun',
-    icon:'🌞',
-    scenes:[
-      {e:'🌅',t:'The sun comes up in the morning.'},
-      {e:'☀️',t:'The sun is big and bright.'},
-      {e:'🌸',t:'Flowers open when they see the sun.'},
-      {e:'🐝',t:'A bee flies to the flowers.'},
-      {e:'😊',t:'The sun makes us happy!'}
-    ],
-    q:'When does the sun come up?',
-    o:['At night','In the morning','At lunch','In the evening'],
-    a:1
-  },
-  {
-    title:'My Dog Rex',
-    icon:'🐶',
-    scenes:[
-      {e:'🐶',t:'I have a dog. His name is Rex.'},
-      {e:'🏃',t:'Rex loves to run and play.'},
-      {e:'🦴',t:'His favorite thing is a big bone.'},
-      {e:'💤',t:'At night Rex sleeps by my bed.'},
-      {e:'❤️',t:'I love my dog Rex so much!'}
-    ],
-    q:'What is the dog\'s name?',
-    o:['Max','Buddy','Rex','Spot'],
-    a:2
-  },
-  {
-    title:'Rain and Puddles',
-    icon:'🌧️',
-    scenes:[
-      {e:'☁️',t:'Dark clouds come in the sky.'},
-      {e:'🌧️',t:'It starts to rain. Drip drip drip!'},
-      {e:'💧',t:'Big puddles form on the ground.'},
-      {e:'👟',t:'Ana puts on her rain boots.'},
-      {e:'💦',t:'She jumps in the puddles. Splash!'}
-    ],
-    q:'What did Ana put on?',
-    o:['A hat','A coat','Rain boots','Gloves'],
-    a:2
-  },
-  {
-    title:'The Yellow Duck',
-    icon:'🦆',
-    scenes:[
-      {e:'🌊',t:'There is a pond in the park.'},
-      {e:'🦆',t:'A little yellow duck lives in the pond.'},
-      {e:'🍞',t:'The duck eats bread in the water.'},
-      {e:'🐥',t:'She has three baby ducks.'},
-      {e:'😄',t:'The duck family swims together!'}
-    ],
-    q:'Where does the duck live?',
-    o:['In a tree','In a pond','In a house','In a nest'],
-    a:1
-  },
-  {
-    title:'Stars at Night',
-    icon:'⭐',
-    scenes:[
-      {e:'🌙',t:'At night the sky gets dark.'},
-      {e:'⭐',t:'Tiny stars come out to shine.'},
-      {e:'🔭',t:'We can look at the stars with a telescope.'},
-      {e:'💫',t:'Some stars are very far away.'},
-      {e:'😴',t:'We sleep under the pretty stars.'}
-    ],
-    q:'When do stars come out?',
-    o:['In the morning','At lunch','At night','In the afternoon'],
-    a:2
-  }
+var STRS=[
+  {title:'The Little Red Apple',icon:'🍎',scenes:[{e:'🌳',t:'There is a big tree.'},{e:'🍎',t:'A red apple grows on the tree.'},{e:'🐛',t:'A small bug sits on the apple.'},{e:'👧',t:'Emma sees the apple.'},{e:'😋',t:'She picks it and eats it. Yum!'}],q:'What color is the apple?',o:['Blue','Red','Yellow','Green'],a:1},
+  {title:'The Big Sun',icon:'🌞',scenes:[{e:'🌅',t:'The sun comes up in the morning.'},{e:'☀️',t:'The sun is big and bright.'},{e:'🌸',t:'Flowers open when they see the sun.'},{e:'🐝',t:'A bee flies to the flowers.'},{e:'😊',t:'The sun makes us happy!'}],q:'When does the sun come up?',o:['At night','In the morning','At lunch','In the evening'],a:1},
+  {title:'My Dog Rex',icon:'🐶',scenes:[{e:'🐶',t:'I have a dog. His name is Rex.'},{e:'🏃',t:'Rex loves to run and play.'},{e:'🦴',t:'His favorite thing is a big bone.'},{e:'💤',t:'At night Rex sleeps by my bed.'},{e:'❤️',t:'I love my dog Rex so much!'}],q:'What is the name of the dog?',o:['Max','Buddy','Rex','Spot'],a:2},
+  {title:'Rain and Puddles',icon:'🌧️',scenes:[{e:'☁️',t:'Dark clouds come in the sky.'},{e:'🌧️',t:'It starts to rain. Drip drip drip!'},{e:'💧',t:'Big puddles form on the ground.'},{e:'👟',t:'Ana puts on her rain boots.'},{e:'💦',t:'She jumps in the puddles. Splash!'}],q:'What did Ana put on?',o:['A hat','A coat','Rain boots','Gloves'],a:2},
+  {title:'The Yellow Duck',icon:'🦆',scenes:[{e:'🌊',t:'There is a pond in the park.'},{e:'🦆',t:'A little yellow duck lives in the pond.'},{e:'🍞',t:'The duck eats bread in the water.'},{e:'🐥',t:'She has three baby ducks.'},{e:'😄',t:'The duck family swims together!'}],q:'Where does the duck live?',o:['In a tree','In a pond','In a house','In a nest'],a:1},
+  {title:'Stars at Night',icon:'⭐',scenes:[{e:'🌙',t:'At night the sky gets dark.'},{e:'⭐',t:'Tiny stars come out to shine.'},{e:'🔭',t:'We look at the stars at night.'},{e:'💫',t:'Some stars are very far away.'},{e:'😴',t:'We sleep under the pretty stars.'}],q:'When do stars come out?',o:['Morning','At lunch','At night','Afternoon'],a:2}
 ];
- 
-// ===== SCIENCE DATA =====
-var SCI_CATS=['Animals','Plants & Trees','Food','Planets','Earth','Our Body'];
+var SCI_CATS=['Animals','Plants','Food','Planets','Earth','Our Body'];
 var SCI_DATA={
   'Animals':[
-    {e:'🐘',n:'Elephant',f:'Elephants are the biggest animals on land. They drink water with their long trunk. Baby elephants are called calves.',spk:'Elephants are the biggest animals that live on land. They use their long trunk to drink water and pick up things. Baby elephants are called calves.'},
-    {e:'🦁',n:'Lion',f:'Lions are called the king of the jungle. They live in groups called a pride. Baby lions are called cubs.',spk:'Lions are called the king of the jungle. They live together in a group called a pride. Baby lions are called cute little cubs.'},
-    {e:'🐬',n:'Dolphin',f:'Dolphins live in the ocean. They are very smart and friendly. They talk to each other using clicks and whistles!',spk:'Dolphins live in the ocean. They are very smart and friendly animals. They talk to each other using special clicking and whistling sounds.'},
-    {e:'🦋',n:'Butterfly',f:'Butterflies start as a caterpillar. Then they grow wings and become beautiful! They drink from flowers.',spk:'Butterflies start their life as a caterpillar. Then they grow beautiful wings and fly. They drink sweet nectar from flowers.'},
-    {e:'🐧',n:'Penguin',f:'Penguins are birds but they cannot fly! They swim in cold icy water. They live in a place called Antarctica.',spk:'Penguins are birds but they cannot fly. They swim very fast in cold icy water. They live in a very cold place called Antarctica.'},
-    {e:'🦒',n:'Giraffe',f:'Giraffes have the longest neck of any animal! They eat leaves from the tops of tall trees.',spk:'Giraffes have the longest neck of any animal in the world. They use their long neck to eat leaves from the very top of tall trees.'}
+    {e:'🐘',n:'Elephant',f:'Biggest animal on land. Drinks with its long trunk. Babies are called calves.',spk:'Elephants are the biggest animals that live on land. They use their long trunk to drink water. Baby elephants are called calves.'},
+    {e:'🦁',n:'Lion',f:'Called the king of the jungle. Lives in groups called a pride. Babies are called cubs.',spk:'Lions are called the king of the jungle. They live in groups called a pride. Baby lions are called cubs.'},
+    {e:'🐬',n:'Dolphin',f:'Lives in the ocean. Very smart and friendly. Talks using clicks and whistles!',spk:'Dolphins live in the ocean. They are very smart and friendly. They talk to each other using clicks and whistles.'},
+    {e:'🦋',n:'Butterfly',f:'Starts as a caterpillar. Grows wings and becomes beautiful! Drinks from flowers.',spk:'A butterfly starts life as a caterpillar. Then it grows beautiful wings and flies. It drinks sweet nectar from flowers.'},
+    {e:'🐧',n:'Penguin',f:'A bird that cannot fly! Swims in cold icy water. Lives in Antarctica.',spk:'Penguins are birds but they cannot fly. They swim in cold icy water. They live in a very cold place called Antarctica.'},
+    {e:'🦒',n:'Giraffe',f:'Has the longest neck of any animal! Eats leaves from tops of tall trees.',spk:'Giraffes have the longest neck of any animal. They eat leaves from the very tops of tall trees.'}
   ],
-  'Plants & Trees':[
-    {e:'🌱',n:'How Plants Grow',f:'Plants need water, sun, and soil to grow. They start as a tiny seed. Then a stem and leaves grow out!',spk:'Plants need three things to grow. They need water, sunlight, and soil. They start as a tiny seed in the ground. Then a little stem and leaves grow out.'},
-    {e:'🌳',n:'Trees',f:'Trees are the biggest plants. They have roots under the ground. Roots drink up water for the tree!',spk:'Trees are the biggest plants on Earth. They have roots that go deep under the ground. The roots drink up water and send it up through the trunk to the leaves.'},
-    {e:'🌸',n:'Flowers',f:'Flowers are colorful parts of plants. Bees visit flowers to collect sweet nectar. Flowers make seeds to grow new plants!',spk:'Flowers are the colorful and beautiful part of a plant. Bees love to visit flowers to collect sweet nectar. Flowers also make seeds that can grow into new plants.'},
-    {e:'🍁',n:'Leaves',f:'Leaves are green because of something called chlorophyll. Leaves make food for the plant using sunlight!',spk:'Leaves are usually green because they contain something special called chlorophyll. Leaves are like tiny factories that make food for the plant using sunlight.'},
-    {e:'🌵',n:'Cactus',f:'A cactus lives in the desert where it is very hot and dry. It stores water inside its thick stem!',spk:'A cactus is a special plant that lives in the desert where it is very hot and dry. It stores water inside its big thick stem so it can survive without rain.'},
-    {e:'🍄',n:'Mushroom',f:'Mushrooms are not plants! They are fungi. They grow in dark damp places like forests. Some mushrooms are food!',spk:'Mushrooms are not actually plants. They are called fungi. Mushrooms grow in dark and damp places like forests. Some mushrooms are safe to eat and very tasty.'}
+  'Plants':[
+    {e:'🌱',n:'How Plants Grow',f:'Plants need water, sun, and soil. Start as a tiny seed. Then stem and leaves grow!',spk:'Plants need three things to grow. Water, sunlight, and soil. They start as a tiny seed. Then a stem and leaves grow out.'},
+    {e:'🌳',n:'Trees',f:'Biggest plants on Earth. Have roots underground. Roots drink water for the tree!',spk:'Trees are the biggest plants on Earth. They have roots that go underground. The roots drink water and send it up through the trunk to the leaves.'},
+    {e:'🌸',n:'Flowers',f:'Colorful parts of plants. Bees visit for nectar. Make seeds to grow new plants!',spk:'Flowers are colorful parts of a plant. Bees love to visit flowers to get sweet nectar. Flowers also make seeds that grow into new plants.'},
+    {e:'🌵',n:'Cactus',f:'Lives in the hot dry desert. Stores water in its thick stem!',spk:'A cactus lives in the desert where it is very hot and dry. It stores water inside its thick stem so it can survive without rain.'},
+    {e:'🍄',n:'Mushroom',f:'Not a plant — it is a fungus! Grows in dark damp places like forests.',spk:'Mushrooms are not plants. They are called fungi. Mushrooms grow in dark damp places like forests. Some are safe to eat.'},
+    {e:'🍁',n:'Leaves',f:'Green because of chlorophyll. Make food for the plant using sunlight!',spk:'Leaves are green because of something called chlorophyll. Leaves make food for the plant using sunlight.'}
   ],
   'Food':[
-    {e:'🍎',n:'Fruits',f:'Fruits grow on trees and plants. They are sweet and full of vitamins. Apples, oranges and bananas are fruits!',spk:'Fruits grow on trees and plants. They taste sweet and are packed with vitamins that keep us healthy. Apples, oranges, and bananas are all fruits.'},
-    {e:'🥦',n:'Vegetables',f:'Vegetables help us grow big and strong! Carrots help our eyes. Broccoli is full of goodness.',spk:'Vegetables are super healthy foods that help us grow big and strong. Carrots are great for our eyes. Broccoli is full of vitamins and goodness.'},
-    {e:'🥛',n:'Milk',f:'Milk comes from cows. It has calcium which makes our bones and teeth strong. We can also make cheese and yogurt from milk!',spk:'Milk comes from cows. It contains something called calcium which makes our bones and teeth strong. We can also make cheese and yogurt from milk.'},
-    {e:'🍞',n:'Bread',f:'Bread is made from flour, water, and yeast. It gives us energy to play and learn all day!',spk:'Bread is made from flour, water, and yeast. When the dough bakes in the oven it puffs up and becomes soft bread. Bread gives us energy to play and learn all day long.'},
-    {e:'🥚',n:'Eggs',f:'Eggs come from chickens. They are full of protein which helps our muscles grow. We can fry, boil, or scramble eggs!',spk:'Eggs come from hens which are girl chickens. They are full of something called protein which helps our muscles grow big and strong. We can fry, boil, or scramble eggs in many yummy ways.'},
-    {e:'🍊',n:'Orange',f:'Oranges are full of vitamin C. Vitamin C keeps us from getting sick. Oranges are juicy and sweet and grow on trees!',spk:'Oranges are a wonderful fruit full of vitamin C. Vitamin C is very important because it helps keep us from getting sick. Oranges are juicy and sweet and grow on trees in warm sunny places.'}
+    {e:'🍎',n:'Fruits',f:'Grow on trees and plants. Sweet and full of vitamins. Apples, oranges, bananas!',spk:'Fruits grow on trees and plants. They are sweet and full of vitamins that keep us healthy. Apples, oranges, and bananas are all fruits.'},
+    {e:'🥦',n:'Vegetables',f:'Help us grow big and strong! Carrots help our eyes. Broccoli is full of goodness.',spk:'Vegetables are very healthy and help us grow big and strong. Carrots are great for our eyes. Broccoli is full of vitamins.'},
+    {e:'🥛',n:'Milk',f:'Comes from cows. Has calcium which makes bones and teeth strong!',spk:'Milk comes from cows. It has something called calcium which makes our bones and teeth strong. We can also make cheese and yogurt from milk.'},
+    {e:'🍞',n:'Bread',f:'Made from flour, water, and yeast. Gives us energy to play and learn!',spk:'Bread is made from flour, water, and yeast. It gives us energy to play and learn all day long.'},
+    {e:'🥚',n:'Eggs',f:'Come from chickens. Full of protein which helps muscles grow!',spk:'Eggs come from hens. They are full of protein which helps our muscles grow big and strong. We can fry, boil, or scramble eggs.'},
+    {e:'🍊',n:'Orange',f:'Full of vitamin C. Keeps us from getting sick. Juicy and sweet!',spk:'Oranges are full of vitamin C which helps keep us from getting sick. They are juicy, sweet, and grow on trees.'}
   ],
   'Planets':[
-    {e:'🌍',n:'Earth',f:'Earth is our home planet! It is the third planet from the Sun. Earth has water, air, and land for us to live on.',spk:'Earth is our home planet. It is the third planet from the Sun. Earth is very special because it has water, air, and land which gives us everything we need to live.'},
-    {e:'☀️',n:'The Sun',f:'The Sun is a giant ball of fire! It gives us light and warmth. Without the Sun there would be no life on Earth.',spk:'The Sun is a giant ball of very hot fire. It gives us light during the day and keeps us warm. Without the Sun there would be no light, no warmth, and no life on Earth.'},
-    {e:'🌙',n:'The Moon',f:'The Moon goes around Earth. It has no air or water. At night the Moon reflects sunlight so we can see it shine!',spk:'The Moon travels around our planet Earth. It has no air or water on it. At night the Moon reflects light from the Sun and that is why we can see it shine so brightly in the night sky.'},
-    {e:'🔴',n:'Mars',f:'Mars is called the Red Planet because it looks red! It is very cold and dusty. Scientists want to visit Mars one day.',spk:'Mars is called the Red Planet because its surface looks red and rusty. It is a very cold and dusty planet. Scientists dream of sending people to visit Mars one day.'},
-    {e:'🟠',n:'Jupiter',f:'Jupiter is the biggest planet! It is so big that 1000 Earths could fit inside it. It has a giant red storm on it!',spk:'Jupiter is the biggest planet in our solar system. It is so enormous that more than one thousand Earths could fit inside it. Jupiter has a giant red swirling storm on its surface that has been going for hundreds of years.'},
-    {e:'💫',n:'Stars',f:'Stars are giant balls of fire very far away. At night we see them as tiny lights. Our Sun is also a star!',spk:'Stars are giant balls of fire just like our Sun, but they are incredibly far away. That is why they look like tiny little lights in the night sky. Our very own Sun is actually a star too.'}
+    {e:'🌍',n:'Earth',f:'Our home planet! Third planet from the Sun. Has water, air, and land.',spk:'Earth is our home planet. It is the third planet from the Sun. Earth has water, air, and land which gives us everything we need to live.'},
+    {e:'☀️',n:'The Sun',f:'Giant ball of fire! Gives us light and warmth. Without it there is no life.',spk:'The Sun is a giant ball of very hot fire. It gives us light and warmth. Without the Sun there would be no life on Earth.'},
+    {e:'🌙',n:'The Moon',f:'Goes around Earth. No air or water. Reflects sunlight at night!',spk:'The Moon goes around our planet Earth. It has no air or water. At night the Moon reflects light from the Sun so we can see it shine.'},
+    {e:'🔴',n:'Mars',f:'Called the Red Planet because it looks red! Very cold and dusty.',spk:'Mars is called the Red Planet because its surface looks red. It is a very cold and dusty planet. Scientists dream of sending people there one day.'},
+    {e:'🟠',n:'Jupiter',f:'Biggest planet! 1000 Earths fit inside it. Has a giant red storm!',spk:'Jupiter is the biggest planet in our solar system. It is so big that over one thousand Earths could fit inside it. It has a giant red storm on it.'},
+    {e:'💫',n:'Stars',f:'Giant balls of fire very far away. Look like tiny lights at night. Our Sun is a star!',spk:'Stars are giant balls of fire just like our Sun but very far away. That is why they look like tiny lights in the night sky. Our Sun is also a star.'}
   ],
   'Earth':[
-    {e:'🌊',n:'Ocean',f:'The ocean covers most of our Earth! It is full of fish, whales, and colorful corals. The ocean is very deep.',spk:'The ocean covers most of our planet Earth. It is filled with millions of animals including fish, whales, sharks, and beautiful colorful coral reefs. The ocean can be incredibly deep.'},
-    {e:'🏔️',n:'Mountains',f:'Mountains are very tall hills made of rock. The tallest mountain is Mount Everest. Snow falls on top of mountains!',spk:'Mountains are very tall hills made of rock and earth. The tallest mountain in the world is called Mount Everest. It is so tall that snow and ice stay on top of it all year long.'},
-    {e:'🌋',n:'Volcano',f:'A volcano is a mountain that can explode! Hot melted rock called lava shoots out. It is very hot!',spk:'A volcano is a special kind of mountain that can erupt or explode. When it erupts, very hot melted rock called lava shoots out from the top. Lava is incredibly hot.'},
-    {e:'🌧️',n:'Rain',f:'Water goes up into the sky as clouds. Then it falls back down as rain. Rain gives water to plants and rivers!',spk:'Water from oceans and lakes rises up into the sky and forms clouds. When the clouds get heavy with water it falls back down to Earth as rain. Rain gives water to all the plants, rivers, and animals.'},
-    {e:'🌈',n:'Rainbow',f:'A rainbow appears after rain when the sun shines. Light splits into 7 colors: red, orange, yellow, green, blue, and purple!',spk:'A rainbow appears after it rains when the sunlight shines through tiny water drops in the air. The light splits into seven beautiful colors: red, orange, yellow, green, blue, indigo, and purple.'},
-    {e:'❄️',n:'Snow',f:'Snow is frozen water that falls from clouds. Every snowflake has a unique shape! Snow feels cold and soft.',spk:'Snow is water that freezes inside clouds and falls to the ground as tiny white flakes. Every single snowflake has its own unique and beautiful shape. Snow feels cold and soft when you touch it.'}
+    {e:'🌊',n:'Ocean',f:'Covers most of Earth! Full of fish, whales, and colorful coral. Very deep!',spk:'The ocean covers most of our planet. It is filled with fish, whales, sharks, and beautiful coral reefs. The ocean is incredibly deep.'},
+    {e:'🏔️',n:'Mountains',f:'Very tall hills made of rock. Tallest is Mount Everest. Snow on top!',spk:'Mountains are very tall hills made of rock. The tallest mountain is Mount Everest. It is so tall that snow stays on top all year long.'},
+    {e:'🌈',n:'Rainbow',f:'Appears after rain when sun shines. Has 7 colors: red, orange, yellow, green, blue, and purple!',spk:'A rainbow appears after rain when sunlight shines through water drops in the air. It has seven beautiful colors: red, orange, yellow, green, blue, indigo, and purple.'},
+    {e:'🌧️',n:'Rain',f:'Water rises up to form clouds. Then falls back down as rain. Gives water to plants!',spk:'Water rises up into the sky and forms clouds. When clouds get heavy the water falls back down as rain. Rain gives water to plants and rivers.'},
+    {e:'❄️',n:'Snow',f:'Frozen water falling from clouds. Every snowflake is unique! Feels cold and soft.',spk:'Snow is frozen water that falls from clouds. Every single snowflake has its own unique shape. Snow feels cold and soft when you touch it.'},
+    {e:'🌋',n:'Volcano',f:'A mountain that can explode! Hot melted rock called lava shoots out!',spk:'A volcano is a mountain that can erupt. When it erupts very hot melted rock called lava shoots out from the top. Lava is incredibly hot.'}
   ],
   'Our Body':[
-    {e:'❤️',n:'Heart',f:'Your heart pumps blood all around your body. It beats about 100 times every minute! Put your hand on your chest and feel it!',spk:'Your heart is a very important muscle that pumps blood all around your body. It beats about one hundred times every single minute. Put your hand on your chest and you can feel it beating right now.'},
-    {e:'🧠',n:'Brain',f:'Your brain is your thinking machine! It controls everything you do — walking, talking, dreaming, and learning.',spk:'Your brain is your amazing thinking machine inside your head. It controls everything you do including walking, talking, dreaming at night, and learning new things every day.'},
-    {e:'👀',n:'Eyes',f:'Your eyes help you see the world! They see colors, shapes, and faces. We should protect our eyes from bright light.',spk:'Your eyes are amazing because they help you see everything in the world around you. They can see millions of colors, shapes, and faces. We should always protect our eyes from very bright light.'},
-    {e:'👂',n:'Ears',f:'Your ears help you hear sounds! You can hear music, birds, and people talking. Ears also help you keep your balance!',spk:'Your ears are very special because they help you hear all the sounds around you. You can hear music, birds singing, and people talking. Your ears also help you keep your balance when you walk.'},
-    {e:'🦷',n:'Teeth',f:'We have teeth to bite and chew food. Brush your teeth two times a day to keep them clean and healthy!',spk:'We have teeth to help us bite and chew our food. It is very important to brush your teeth two times every day, once in the morning and once at night, to keep them clean and healthy.'},
-    {e:'💪',n:'Muscles',f:'Muscles help you move your body! When you exercise your muscles get stronger. Eating healthy food helps muscles grow!',spk:'Muscles are what help you move every part of your body. When you run, jump, and play you are exercising your muscles. The more you exercise and eat healthy food, the bigger and stronger your muscles will grow.'}
+    {e:'❤️',n:'Heart',f:'Pumps blood all around your body. Beats 100 times every minute! Feel it!',spk:'Your heart pumps blood all around your body. It beats about one hundred times every minute. Put your hand on your chest and feel it beating.'},
+    {e:'🧠',n:'Brain',f:'Your thinking machine! Controls walking, talking, dreaming, and learning.',spk:'Your brain is your thinking machine. It controls everything you do including walking, talking, dreaming, and learning new things every day.'},
+    {e:'👀',n:'Eyes',f:'Help you see the world! See colors, shapes, and faces.',spk:'Your eyes help you see everything in the world. They can see millions of colors, shapes, and faces. We should protect our eyes from very bright light.'},
+    {e:'👂',n:'Ears',f:'Help you hear sounds! Music, birds, voices. Also help you balance!',spk:'Your ears help you hear all the sounds around you like music, birds, and people talking. Your ears also help you keep your balance.'},
+    {e:'🦷',n:'Teeth',f:'Bite and chew food. Brush two times a day to keep them healthy!',spk:'We have teeth to bite and chew our food. Brush your teeth two times every day to keep them clean and healthy.'},
+    {e:'💪',n:'Muscles',f:'Help you move your body! Exercise makes them stronger. Healthy food helps too!',spk:'Muscles help you move every part of your body. When you run and play you are making your muscles stronger. Eating healthy food helps muscles grow.'}
   ]
 };
- 
-// Science quiz questions
 var SCI_QUIZ=[
   {e:'🐘',q:'Elephants drink water with their…',o:['Mouth','Trunk','Tail','Ears'],a:1},
   {e:'🌱',q:'Plants need sun, soil, and…',o:['Juice','Milk','Water','Sand'],a:2},
-  {e:'🌍',q:'What number planet from the Sun is Earth?',o:['First','Second','Third','Fourth'],a:2},
-  {e:'🌙',q:'The Moon goes around which planet?',o:['Mars','Sun','Jupiter','Earth'],a:3},
+  {e:'🌍',q:'What planet do we live on?',o:['Mars','Jupiter','Earth','Moon'],a:2},
+  {e:'🌙',q:'The Moon goes around…',o:['Mars','The Sun','Jupiter','Earth'],a:3},
   {e:'🍎',q:'Fruits are full of…',o:['Sand','Vitamins','Salt','Mud'],a:1},
-  {e:'❤️',q:'What does your heart pump around your body?',o:['Water','Air','Blood','Juice'],a:2},
+  {e:'❤️',q:'Your heart pumps what around your body?',o:['Water','Air','Blood','Juice'],a:2},
   {e:'🦁',q:'A group of lions is called a…',o:['Herd','Pack','Pride','Flock'],a:2},
-  {e:'🌧️',q:'Rain falls from…',o:['Trees','Clouds','Mountains','The ocean'],a:1},
-  {e:'🥛',q:'Milk helps make our bones and teeth…',o:['Soft','Strong','Green','Small'],a:1},
+  {e:'🌧️',q:'Rain falls from…',o:['Trees','Clouds','Mountains','Rivers'],a:1},
+  {e:'🥛',q:'Milk makes our bones and teeth…',o:['Soft','Strong','Green','Small'],a:1},
   {e:'🧠',q:'Your brain helps you…',o:['Digest food','Think and learn','See colors','Hear sounds'],a:1},
-  {e:'🦋',q:'Before becoming a butterfly it is a…',o:['Baby bee','Caterpillar','Small bird','Worm'],a:1},
+  {e:'🦋',q:'Before a butterfly it is a…',o:['Baby bee','Caterpillar','Small bird','Worm'],a:1},
   {e:'☀️',q:'The Sun gives us light and…',o:['Rain','Snow','Warmth','Wind'],a:2}
 ];
- 
-// ===== STATE =====
-var stars=0, selL=null;
-var pi=0,pscore=0,pdone=false;
-var ni=0,nscore=0,ndone=false;
-var wi=0,wscore=0,wdone=false;
-// story
-var curStory=0, storyDone=false, storyTimer=null, wordTimers=[];
-// science
-var curSciCat='Animals', sciQi=0, sciQscore=0, sciQdone=false;
- 
-// ===== SPEECH =====
-function sayIt(txt,rate,pitch,cb){
-  try{
-    if(!window.speechSynthesis)return;
-    window.speechSynthesis.cancel();
-    var u=new SpeechSynthesisUtterance(txt);
-    u.rate=rate||0.82; u.pitch=pitch||1.1; u.volume=1;
-    var vv=window.speechSynthesis.getVoices();
-    var nice=vv.find(function(v){return v.name.indexOf('Samantha')>-1||v.name.indexOf('Karen')>-1||v.name.indexOf('Moira')>-1||v.name.indexOf('Tessa')>-1;});
-    if(nice)u.voice=nice;
-    if(cb)u.onend=cb;
-    window.speechSynthesis.speak(u);
-  }catch(ex){}
-}
- 
-function readInstr(id){
-  var el=document.getElementById(id);
-  if(el){var t=el.querySelector('.it');if(t)sayIt(t.textContent,0.82,1.1);}
-}
- 
-function addStar(){
-  stars++;
-  document.getElementById('sc').textContent=stars;
-}
- 
-function mkDots(id,tot,cur){
-  var el=document.getElementById(id);if(!el)return;
-  el.innerHTML='';
-  var mx=Math.min(tot,12);
-  for(var i=0;i<mx;i++){
-    var d=document.createElement('div');
-    d.className='dot'+(i<cur?' dn':i===cur?' cu':'');
-    el.appendChild(d);
-  }
-}
- 
-// ===== NAV =====
-function go(name){
-  document.querySelectorAll('.sc').forEach(function(s){s.classList.remove('on');});
-  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('on');});
-  document.getElementById('s-'+name).classList.add('on');
-  document.getElementById('nb-'+name).classList.add('on');
-  setTimeout(function(){readInstr('instr-'+name);},400);
-  if(name==='stories')loadStory(curStory);
-  if(name==='science')renderSciCat('Animals');
-}
- 
-// ===== LETTERS =====
-function buildLG(){
-  var g=document.getElementById('lgrid');g.innerHTML='';
-  LETS.forEach(function(item){
-    var b=document.createElement('button');b.className='lt';b.textContent=item.l;
-    (function(it){
-      b.addEventListener('touchend',function(ev){ev.preventDefault();selLetter(it);},false);
-      b.addEventListener('click',function(){selLetter(it);},false);
-    })(item);
-    g.appendChild(b);
-  });
-}
- 
-function selLetter(e){
-  selL=e;
-  document.querySelectorAll('.lt').forEach(function(b){b.classList.toggle('sel',b.textContent===e.l);});
-  document.getElementById('lc').textContent=e.l+' '+e.lc;
-  document.getElementById('le').textContent=e.e;
-  document.getElementById('lh').textContent=e.l+' is for '+e.w;
-  document.getElementById('sndNameTxt').textContent='🔊 '+e.l;
-  document.getElementById('sndSoundTxt').textContent='🔊 '+e.sound;
-  document.getElementById('ldet').style.display='block';
-  var grid=document.getElementById('exGrid');grid.innerHTML='';
-  e.ex.forEach(function(ex){
-    var tile=document.createElement('div');tile.className='ex-tile';
-    tile.innerHTML='<div class="exe">'+ex.e+'</div><div class="exw">'+ex.w+'</div>';
-    (function(ew){
-      tile.addEventListener('touchend',function(ev){ev.preventDefault();sayIt(ew,0.8,1.1);},false);
-      tile.addEventListener('click',function(){sayIt(ew,0.8,1.1);},false);
-    })(ex.w);
-    grid.appendChild(tile);
-  });
-  sayIt(e.l+'. '+e.l+' is for '+e.w,0.8,1.15);
-}
- 
-// ===== PHONICS =====
-function rdrP(){
-  var q=PHO[pi%PHO.length];pdone=false;
-  document.getElementById('pl').textContent=q.l;
-  document.getElementById('pf').innerHTML='';
-  document.getElementById('pn').style.display='none';
-  var el=document.getElementById('po');el.innerHTML='';
-  q.o.forEach(function(o,i){
-    var b=document.createElement('button');b.className='opt';b.textContent=o;
-    (function(idx){
-      b.addEventListener('touchend',function(ev){ev.preventDefault();chkP(idx,q);},false);
-      b.addEventListener('click',function(){chkP(idx,q);},false);
-    })(i);
-    el.appendChild(b);
-  });
-  mkDots('pd',PHO.length,pi%PHO.length);
-  setTimeout(function(){sayIt('What sound does the letter '+q.l+' make? Tap the right answer!',0.82,1.1);},300);
-}
-function chkP(i,q){
-  if(pdone)return;pdone=true;
-  var btns=document.querySelectorAll('#po .opt');
-  var ok=i===q.a;
-  btns[i].classList.add(ok?'ok':'no');
-  if(!ok)btns[q.a].classList.add('ok');
-  var msg=ok?'Great job! The letter '+q.l+' makes the sound '+q.s+', like in '+q.ex+'!':'The answer is '+q.s+', like in '+q.ex+'. Try again next time!';
-  document.getElementById('pf').innerHTML='<div class="fb '+(ok?'ok':'no')" onclick="sayIt(\''+msg.replace(/'/g,"\\'")+'\')">'+( ok?'🎉 ':'')+msg+'</div>';
-  sayIt(msg,0.82,1.1);
-  if(ok){pscore++;addStar();document.getElementById('ps').textContent='⭐ '+pscore;}
-  document.getElementById('pn').style.display='block';
-}
-function nxtP(){pi++;rdrP();}
- 
-// ===== NUMBERS =====
-function rdrN(){
-  var q=NUMS[ni%NUMS.length];ndone=false;
-  document.getElementById('nd2').textContent=q.e;
-  document.getElementById('nf').innerHTML='';
-  document.getElementById('nn').style.display='none';
-  var el=document.getElementById('no');el.innerHTML='';
-  var shuf=q.o.slice().sort(function(){return Math.random()-0.5;});
-  shuf.forEach(function(o){
-    var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.fontSize='32px';
-    (function(val){
-      b.addEventListener('touchend',function(ev){ev.preventDefault();chkN(val,q);},false);
-      b.addEventListener('click',function(){chkN(val,q);},false);
-    })(o);
-    el.appendChild(b);
-  });
-  mkDots('nd',NUMS.length,ni%NUMS.length);
-  setTimeout(function(){sayIt('Count the pictures! How many do you see? Tap the right number!',0.82,1.1);},300);
-}
-function chkN(val,q){
-  if(ndone)return;ndone=true;
-  var btns=document.querySelectorAll('#no .opt');
-  var ok=val===q.n;
-  btns.forEach(function(b){
-    var v=parseInt(b.textContent);
-    if(v===val&&!ok)b.classList.add('no');
-    if(v===q.n)b.classList.add('ok');
-  });
-  var msg=ok?'Amazing! There are '+q.n+'! You counted it right!':'The answer is '+q.n+'. Count slowly!';
-  document.getElementById('nf').innerHTML='<div class="fb '+(ok?'ok':'no')">'+(ok?'🎉 ':'')+msg+'</div>';
-  sayIt(msg,0.82,1.1);
-  if(ok){nscore++;addStar();document.getElementById('ns').textContent='⭐ '+nscore;}
-  document.getElementById('nn').style.display='block';
-}
-function nxtN(){ni++;rdrN();}
- 
-// ===== WORDS =====
-function rdrW(){
-  var q=WDS[wi%WDS.length];wdone=false;
-  document.getElementById('we').textContent=q.e;
-  document.getElementById('wf').innerHTML='';
-  document.getElementById('wn').style.display='none';
-  var el=document.getElementById('wo');el.innerHTML='';
-  var shuf=q.o.slice().sort(function(){return Math.random()-0.5;});
-  shuf.forEach(function(o){
-    var b=document.createElement('button');b.className='opt';b.style.fontSize='19px';b.style.letterSpacing='2px';b.textContent=o;
-    (function(val){
-      b.addEventListener('touchend',function(ev){ev.preventDefault();chkW(val,q);},false);
-      b.addEventListener('click',function(){chkW(val,q);},false);
-    })(o);
-    el.appendChild(b);
-  });
-  mkDots('wd',WDS.length,wi%WDS.length);
-  setTimeout(function(){sayIt('Look at the picture! Tap the word that matches!',0.82,1.1);},300);
-}
-function chkW(val,q){
-  if(wdone)return;wdone=true;
-  var btns=document.querySelectorAll('#wo .opt');
-  var ok=val===q.w;
-  btns.forEach(function(b){
-    if(b.textContent===val&&!ok)b.classList.add('no');
-    if(b.textContent===q.w)b.classList.add('ok');
-  });
-  var msg=ok?'Yes! The word is '+q.w+'! Great reading!':'The word is '+q.w+'. Look carefully!';
-  document.getElementById('wf').innerHTML='<div class="fb '+(ok?'ok':'no')">'+(ok?'🎉 ':'')+msg+'</div>';
-  sayIt(msg,0.82,1.1);
-  if(ok){wscore++;addStar();document.getElementById('ws').textContent='⭐ '+wscore;}
-  document.getElementById('wn').style.display='block';
-}
-function nxtW(){wi++;rdrW();}
- 
-// ===== STORIES =====
-function buildStorySelector(){
-  var sel=document.getElementById('storySelector');
-  sel.innerHTML='';
-  STORIES.forEach(function(s,i){
-    var b=document.createElement('button');
-    b.className='story-tab'+(i===0?' on':'');
-    b.textContent=s.icon+' '+s.title;
-    (function(idx){
-      b.addEventListener('touchend',function(ev){ev.preventDefault();selectStory(idx);},false);
-      b.addEventListener('click',function(){selectStory(idx);},false);
-    })(i);
-    sel.appendChild(b);
-  });
-}
- 
-function selectStory(idx){
-  stopStory();
-  curStory=idx;storyDone=false;
-  document.querySelectorAll('.story-tab').forEach(function(b,i){b.classList.toggle('on',i===idx);});
-  loadStory(idx);
-}
- 
-function loadStory(idx){
-  stopStory();
-  storyDone=false;
-  var s=STORIES[idx];
-  document.getElementById('storyTitle').textContent=s.title;
-  document.getElementById('storyFb').innerHTML='';
-  document.getElementById('storyNext').style.display='none';
-  document.getElementById('storyOpts').style.display='none';
-  document.getElementById('storyOpts').innerHTML='';
-  document.getElementById('storyQBox').style.display='none';
-  document.getElementById('storyPlayBtn').classList.remove('playing');
-  document.getElementById('storyPlayBtn').textContent='▶ Read to me!';
-  // show first scene
-  showScene(idx,0);
-  // build word spans for scene 0
-  buildSceneText(idx,0);
-}
- 
-var curScene=0;
- 
-function showScene(storyIdx,sceneIdx){
-  curScene=sceneIdx;
-  var s=STORIES[storyIdx];
-  var scene=s.scenes[sceneIdx];
-  document.getElementById('storyScene').textContent=scene.e;
-  buildSceneText(storyIdx,sceneIdx);
-}
- 
-function buildSceneText(storyIdx,sceneIdx){
-  var scene=STORIES[storyIdx].scenes[sceneIdx];
-  var wrap=document.getElementById('storyTextWrap');
-  wrap.innerHTML='';
-  var words=scene.t.split(' ');
-  words.forEach(function(w,i){
-    var span=document.createElement('span');
-    span.className='story-word';
-    span.id='sw-'+i;
-    span.textContent=w;
-    wrap.appendChild(span);
-    if(i<words.length-1){
-      var sp=document.createElement('span');sp.className='story-word-space';sp.textContent=' ';
-      wrap.appendChild(sp);
-    }
-  });
-}
- 
-function playStory(){
-  var s=STORIES[curStory];
-  document.getElementById('storyPlayBtn').classList.add('playing');
-  document.getElementById('storyPlayBtn').textContent='⏸ Reading...';
-  playScene(curStory,0);
-}
- 
-function playScene(storyIdx,sceneIdx){
-  if(sceneIdx>=STORIES[storyIdx].scenes.length){
-    // all scenes done — show question
-    onStoryScenesFinished(storyIdx);
-    return;
-  }
-  curScene=sceneIdx;
-  showScene(storyIdx,sceneIdx);
-  var scene=STORIES[storyIdx].scenes[sceneIdx];
-  // highlight words while reading
-  highlightWords(scene.t,function(){
-    // after this scene finishes move to next
-    setTimeout(function(){playScene(storyIdx,sceneIdx+1);},500);
-  });
-}
- 
-function highlightWords(text,onDone){
-  clearWordTimers();
-  var words=text.split(' ');
-  var totalLen=0;
-  // estimate timing: ~0.38s per word at rate 0.78
-  var msPerWord=420;
-  words.forEach(function(w,i){
-    var t=window.setTimeout(function(){
-      document.querySelectorAll('.story-word').forEach(function(el){el.classList.remove('hi');});
-      var el=document.getElementById('sw-'+i);
-      if(el)el.classList.add('hi');
-    },i*msPerWord);
-    wordTimers.push(t);
-  });
-  // speak
-  if(window.speechSynthesis){
-    window.speechSynthesis.cancel();
-    var u=new SpeechSynthesisUtterance(text);
-    u.rate=0.78;u.pitch=1.05;u.volume=1;
-    var vv=window.speechSynthesis.getVoices();
-    var nice=vv.find(function(v){return v.name.indexOf('Samantha')>-1||v.name.indexOf('Karen')>-1||v.name.indexOf('Moira')>-1||v.name.indexOf('Tessa')>-1;});
-    if(nice)u.voice=nice;
-    u.onend=function(){
-      document.querySelectorAll('.story-word').forEach(function(el){el.classList.remove('hi');});
-      if(onDone)onDone();
-    };
-    window.speechSynthesis.speak(u);
-  } else {
-    var fallback=window.setTimeout(function(){
-      document.querySelectorAll('.story-word').forEach(function(el){el.classList.remove('hi');});
-      if(onDone)onDone();
-    },words.length*msPerWord+400);
-    wordTimers.push(fallback);
-  }
-}
- 
-function clearWordTimers(){
-  wordTimers.forEach(function(t){clearTimeout(t);});
-  wordTimers=[];
-}
- 
-function stopStory(){
-  clearWordTimers();
-  if(window.speechSynthesis)window.speechSynthesis.cancel();
-  document.querySelectorAll('.story-word').forEach(function(el){el.classList.remove('hi');});
-  document.getElementById('storyPlayBtn').classList.remove('playing');
-  document.getElementById('storyPlayBtn').textContent='▶ Read to me!';
-}
- 
-function onStoryScenesFinished(storyIdx){
-  document.getElementById('storyPlayBtn').classList.remove('playing');
-  document.getElementById('storyPlayBtn').textContent='✅ Done!';
-  var s=STORIES[storyIdx];
-  // show question
-  document.getElementById('storyQText').textContent=s.q;
-  document.getElementById('storyQBox').style.display='block';
-  // build options
-  var el=document.getElementById('storyOpts');
-  el.innerHTML='';
-  el.style.display='grid';
-  s.o.forEach(function(o,i){
-    var b=document.createElement('button');b.className='opt';b.style.fontSize='17px';b.textContent=o;
-    (function(idx){
-      b.addEventListener('touchend',function(ev){ev.preventDefault();chkStory(idx,s);},false);
-      b.addEventListener('click',function(){chkStory(idx,s);},false);
-    })(i);
-    el.appendChild(b);
-  });
-  // speak question
-  setTimeout(function(){sayIt('Now answer this question. '+s.q,0.82,1.1);},600);
-}
- 
-function chkStory(i,s){
-  if(storyDone)return;storyDone=true;
-  var btns=document.querySelectorAll('#storyOpts .opt');
-  var ok=i===s.a;
-  btns[i].classList.add(ok?'ok':'no');
-  if(!ok)btns[s.a].classList.add('ok');
-  var msg=ok?'Amazing! You understood the story, Emma! Great job!':'Let us listen to the story again to find the answer!';
-  document.getElementById('storyFb').innerHTML='<div class="fb '+(ok?'ok':'no')">'+(ok?'🎉 ':'')+msg+'</div>';
-  sayIt(msg,0.82,1.1);
-  if(ok)addStar();
-  document.getElementById('storyNext').style.display='block';
-}
- 
-// ===== SCIENCE =====
-function buildSciCats(){
-  var el=document.getElementById('sciCats');el.innerHTML='';
-  SCI_CATS.forEach(function(cat){
-    var b=document.createElement('button');
-    b.className='sci-cat'+(cat==='Animals'?' on':'');
-    b.textContent=cat;
-    (function(c){
-      b.addEventListener('touchend',function(ev){ev.preventDefault();renderSciCat(c);},false);
-      b.addEventListener('click',function(){renderSciCat(c);},false);
-    })(cat);
-    el.appendChild(b);
-  });
-}
- 
-function renderSciCat(cat){
-  curSciCat=cat;
-  document.querySelectorAll('.sci-cat').forEach(function(b){b.classList.toggle('on',b.textContent===cat);});
-  var cards=document.getElementById('sciCards');cards.innerHTML='';
-  var items=SCI_DATA[cat];
-  items.forEach(function(item){
-    var c=document.createElement('div');c.className='sci-card';
-    c.innerHTML='<div class="sci-emoji">'+item.e+'</div><div class="sci-name">'+item.n+'</div><div class="sci-fact">'+item.f+'</div><button class="sci-spk">🔊 Tell me about this!</button>';
-    var btn=c.querySelector('.sci-spk');
-    (function(spk){
-      btn.addEventListener('touchend',function(ev){ev.preventDefault();sayIt(spk,0.8,1.05);},false);
-      btn.addEventListener('click',function(){sayIt(spk,0.8,1.05);},false);
-    })(item.spk);
-    // tap card also speaks
-    (function(spk){
-      c.addEventListener('touchend',function(ev){
-        if(ev.target.tagName==='BUTTON')return;
-        ev.preventDefault();sayIt(spk,0.8,1.05);
-      },false);
-    })(item.spk);
-    cards.appendChild(c);
-  });
-  // show quiz section
-  document.getElementById('sciQuizWrap').style.display='block';
-  sciQi=0;sciQscore=0;sciQdone=false;
-  document.getElementById('sciQScore').textContent='⭐ 0';
-  renderSciQ();
-  setTimeout(function(){sayIt('Pick any card and tap it to hear about it! Then try the quiz!',0.82,1.1);},400);
-}
- 
-function renderSciQ(){
-  var q=SCI_QUIZ[sciQi%SCI_QUIZ.length];sciQdone=false;
-  document.getElementById('sciQEmoji').textContent=q.e;
-  document.getElementById('sciQText').textContent=q.q;
-  document.getElementById('sciQFb').innerHTML='';
-  document.getElementById('sciQNext').style.display='none';
-  var el=document.getElementById('sciQOpts');el.innerHTML='';
-  q.o.forEach(function(o,i){
-    var b=document.createElement('button');b.className='opt';b.style.fontSize='17px';b.textContent=o;
-    (function(idx){
-      b.addEventListener('touchend',function(ev){ev.preventDefault();chkSciQ(idx,q);},false);
-      b.addEventListener('click',function(){chkSciQ(idx,q);},false);
-    })(i);
-    el.appendChild(b);
-  });
-  mkDots('sciQDots',SCI_QUIZ.length,sciQi%SCI_QUIZ.length);
-  setTimeout(function(){sayIt(q.q+' Tap the right answer!',0.82,1.1);},300);
-}
- 
-function chkSciQ(i,q){
-  if(sciQdone)return;sciQdone=true;
-  var btns=document.querySelectorAll('#sciQOpts .opt');
-  var ok=i===q.a;
-  btns[i].classList.add(ok?'ok':'no');
-  if(!ok)btns[q.a].classList.add('ok');
-  var msg=ok?'You are so smart! That is correct!':'The right answer is '+q.o[q.a]+'. Keep learning!';
-  document.getElementById('sciQFb').innerHTML='<div class="fb '+(ok?'ok':'no')">'+(ok?'🎉 ':'')+msg+'</div>';
-  sayIt(msg,0.82,1.1);
-  if(ok){sciQscore++;addStar();document.getElementById('sciQScore').textContent='⭐ '+sciQscore;}
-  document.getElementById('sciQNext').style.display='block';
-}
- 
-// ===== INIT =====
-window.addEventListener('DOMContentLoaded',function(){
- 
-  document.getElementById('startBtn').addEventListener('touchend',function(ev){ev.preventDefault();startApp();},false);
-  document.getElementById('startBtn').addEventListener('click',function(){startApp();});
- 
-  // nav
-  ['letters','phonics','numbers','words','stories','science'].forEach(function(name){
-    document.getElementById('nb-'+name).addEventListener('click',function(){go(name);});
-  });
- 
-  // instruction banners tap to re-read
-  ['letters','phonics','numbers','words','stories','science'].forEach(function(name){
-    var el=document.getElementById('instr-'+name);
-    if(el){
-      el.addEventListener('touchend',function(ev){ev.preventDefault();readInstr('instr-'+name);},false);
-      el.addEventListener('click',function(){readInstr('instr-'+name);});
-    }
-  });
- 
-  // letter sound buttons
-  document.getElementById('sndNameBtn').addEventListener('touchend',function(ev){ev.preventDefault();if(selL)sayIt(selL.l,0.7,1.2);},false);
-  document.getElementById('sndNameBtn').addEventListener('click',function(){if(selL)sayIt(selL.l,0.7,1.2);});
-  document.getElementById('sndSoundBtn').addEventListener('touchend',function(ev){ev.preventDefault();if(selL)sayIt(selL.sound+'. Like the beginning of '+selL.w,0.75,1.1);},false);
-  document.getElementById('sndSoundBtn').addEventListener('click',function(){if(selL)sayIt(selL.sound+'. Like the beginning of '+selL.w,0.75,1.1);});
- 
-  // story buttons
-  document.getElementById('storyPlayBtn').addEventListener('touchend',function(ev){ev.preventDefault();playStory();},false);
-  document.getElementById('storyPlayBtn').addEventListener('click',function(){playStory();});
-  document.getElementById('storyStopBtn').addEventListener('touchend',function(ev){ev.preventDefault();stopStory();},false);
-  document.getElementById('storyStopBtn').addEventListener('click',function(){stopStory();});
-  document.getElementById('storyNext').addEventListener('click',function(){
-    stopStory();
-    var next=(curStory+1)%STORIES.length;
-    selectStory(next);
-    document.getElementById('storyNext').style.display='none';
-  });
- 
-  // phonics / numbers / words next
-  document.getElementById('pn').addEventListener('click',function(){nxtP();});
-  document.getElementById('nn').addEventListener('click',function(){nxtN();});
-  document.getElementById('wn').addEventListener('click',function(){nxtW();});
-  document.getElementById('sciQNext').addEventListener('click',function(){sciQi++;renderSciQ();});
-});
- 
-function startApp(){
-  document.getElementById('splash').style.display='none';
-  var a=document.getElementById('app');
-  a.style.display='flex';a.style.flexDirection='column';
-  buildLG();rdrP();rdrN();rdrW();
-  buildStorySelector();loadStory(0);
-  buildSciCats();
-  setTimeout(function(){sayIt('Hi Emma! Welcome to your learning game! Tap a letter to start!',0.82,1.15);},500);
-  setTimeout(function(){readInstr('instr-letters');},4500);
-}
+var stars=0,selL=null,pi=0,pscore=0,pdone=false,ni=0,nscore=0,ndone=false,wi=0,wscore=0,wdone=false;
+var curStory=0,stDone=false,wTimers=[];
+var sciQi=0,sciQscore=0,sciQdone=false;
+function say(txt,r,p){try{if(!window.speechSynthesis)return;window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(txt);u.rate=r||0.82;u.pitch=p||1.1;u.volume=1;window.speechSynthesis.speak(u);}catch(x){}}
+function ri(id){var e=document.getElementById(id);if(e){var t=e.querySelector('.it');if(t)say(t.textContent,0.82,1.1);}}
+function addStar(){stars++;document.getElementById('sc').textContent=stars;}
+function mkDots(id,tot,cur){var el=document.getElementById(id);if(!el)return;el.innerHTML='';for(var i=0;i<Math.min(tot,12);i++){var d=document.createElement('div');d.className='dot'+(i<cur?' dn':i===cur?' cu':'');el.appendChild(d);}}
+function go(name){document.querySelectorAll('.sc').forEach(function(s){s.classList.remove('on');});document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('on');});document.getElementById('s-'+name).classList.add('on');document.getElementById('nb-'+name).classList.add('on');setTimeout(function(){ri('instr-'+name);},400);if(name==='stories')loadStory(curStory);if(name==='science')buildSciCards('Animals');}
+function buildLG(){var g=document.getElementById('lgrid');g.innerHTML='';LETS.forEach(function(it){var b=document.createElement('button');b.className='lt';b.textContent=it.l;b.onclick=function(){selLetter(it);};g.appendChild(b);});}
+function selLetter(e){selL=e;document.querySelectorAll('.lt').forEach(function(b){b.classList.toggle('sel',b.textContent===e.l);});document.getElementById('lc').textContent=e.l+' '+e.lc;document.getElementById('le').textContent=e.e;document.getElementById('lh').textContent=e.l+' is for '+e.w;document.getElementById('sndNameTxt').textContent='🔊 '+e.l;document.getElementById('sndSoundTxt').textContent='🔊 '+e.sound;document.getElementById('ldet').style.display='block';var g=document.getElementById('exGrid');g.innerHTML='';e.ex.forEach(function(ex){var t=document.createElement('div');t.className='ex-tile';t.innerHTML='<div class="exe">'+ex.e+'</div><div class="exw">'+ex.w+'</div>';t.onclick=function(){say(ex.w,0.8,1.1);};g.appendChild(t);});say(e.l+'. '+e.l+' is for '+e.w,0.8,1.15);}
+function rdrP(){var q=PHO[pi%PHO.length];pdone=false;document.getElementById('pl').textContent=q.l;document.getElementById('pf').innerHTML='';document.getElementById('pn').style.display='none';var el=document.getElementById('po');el.innerHTML='';q.o.forEach(function(o,i){var b=document.createElement('button');b.className='opt';b.textContent=o;b.onclick=function(){chkP(i,q);};el.appendChild(b);});mkDots('pd',PHO.length,pi%PHO.length);setTimeout(function(){say('What sound does the letter '+q.l+' make? Tap the right answer!',0.82,1.1);},300);}
+function chkP(i,q){if(pdone)return;pdone=true;var btns=document.querySelectorAll('#po .opt');var ok=i===q.a;btns[i].classList.add(ok?'ok':'no');if(!ok)btns[q.a].classList.add('ok');var msg=ok?'Great job! '+q.l+' makes the sound '+q.s+' like in '+q.ex+'!':'The answer is '+q.s+' like in '+q.ex+'. Try again!';document.getElementById('pf').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'🎉 ':'')+msg+'</div>';say(msg,0.82,1.1);if(ok){pscore++;addStar();document.getElementById('ps').textContent='⭐ '+pscore;}document.getElementById('pn').style.display='block';}
+function rdrN(){var q=NUMS[ni%NUMS.length];ndone=false;document.getElementById('nd2').textContent=q.e;document.getElementById('nf').innerHTML='';document.getElementById('nn').style.display='none';var el=document.getElementById('no');el.innerHTML='';var sh=q.o.slice().sort(function(){return Math.random()-0.5;});sh.forEach(function(o){var b=document.createElement('button');b.className='opt';b.textContent=o;b.style.fontSize='32px';b.onclick=function(){chkN(o,q);};el.appendChild(b);});mkDots('nd',NUMS.length,ni%NUMS.length);setTimeout(function(){say('Count the pictures! How many do you see? Tap the right number!',0.82,1.1);},300);}
+function chkN(val,q){if(ndone)return;ndone=true;var btns=document.querySelectorAll('#no .opt');var ok=val===q.n;btns.forEach(function(b){var v=parseInt(b.textContent);if(v===val&&!ok)b.classList.add('no');if(v===q.n)b.classList.add('ok');});var msg=ok?'Amazing! There are '+q.n+'! You counted right!':'The answer is '+q.n+'. Count slowly!';document.getElementById('nf').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'🎉 ':'')+msg+'</div>';say(msg,0.82,1.1);if(ok){nscore++;addStar();document.getElementById('ns').textContent='⭐ '+nscore;}document.getElementById('nn').style.display='block';}
+function rdrW(){var q=WDS[wi%WDS.length];wdone=false;document.getElementById('we').textContent=q.e;document.getElementById('wf').innerHTML='';document.getElementById('wn').style.display='none';var el=document.getElementById('wo');el.innerHTML='';var sh=q.o.slice().sort(function(){return Math.random()-0.5;});sh.forEach(function(o){var b=document.createElement('button');b.className='opt';b.style.fontSize='19px';b.textContent=o;b.onclick=function(){chkW(o,q);};el.appendChild(b);});mkDots('wd',WDS.length,wi%WDS.length);setTimeout(function(){say('Look at the picture! Tap the word that matches!',0.82,1.1);},300);}
+function chkW(val,q){if(wdone)return;wdone=true;var btns=document.querySelectorAll('#wo .opt');var ok=val===q.w;btns.forEach(function(b){if(b.textContent===val&&!ok)b.classList.add('no');if(b.textContent===q.w)b.classList.add('ok');});var msg=ok?'Yes! The word is '+q.w+'! Great reading!':'The word is '+q.w+'. Look carefully!';document.getElementById('wf').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'🎉 ':'')+msg+'</div>';say(msg,0.82,1.1);if(ok){wscore++;addStar();document.getElementById('ws').textContent='⭐ '+wscore;}document.getElementById('wn').style.display='block';}
+function buildStorySel(){var el=document.getElementById('storySel');el.innerHTML='';STRS.forEach(function(s,i){var b=document.createElement('button');b.className='story-tab'+(i===0?' on':'');b.textContent=s.icon+' '+s.title;b.onclick=function(){selStory(i);};el.appendChild(b);});}
+function selStory(i){stopStory();curStory=i;stDone=false;document.querySelectorAll('.story-tab').forEach(function(b,j){b.classList.toggle('on',j===i);});loadStory(i);}
+function loadStory(i){stopStory();stDone=false;var s=STRS[i];document.getElementById('stTitle').textContent=s.title;document.getElementById('stFb').innerHTML='';document.getElementById('stNext').style.display='none';document.getElementById('stOpts').style.display='none';document.getElementById('stOpts').innerHTML='';document.getElementById('stQBox').style.display='none';document.getElementById('stPlay').classList.remove('playing');document.getElementById('stPlay').textContent='▶ Read to me!';showScene(i,0);}
+function showScene(si,sc){var scene=STRS[si].scenes[sc];document.getElementById('stScene').textContent=scene.e;var wrap=document.getElementById('stText');wrap.innerHTML='';scene.t.split(' ').forEach(function(w,i){var sp=document.createElement('span');sp.className='sw';sp.id='sw'+i;sp.textContent=w;wrap.appendChild(sp);if(i<scene.t.split(' ').length-1){var s2=document.createElement('span');s2.textContent=' ';wrap.appendChild(s2);}});}
+function playStory(){document.getElementById('stPlay').classList.add('playing');document.getElementById('stPlay').textContent='⏸ Reading...';playScene(curStory,0);}
+function playScene(si,sc){if(sc>=STRS[si].scenes.length){finishStory(si);return;}showScene(si,sc);var txt=STRS[si].scenes[sc].t;var words=txt.split(' ');var ms=420;wTimers.forEach(function(t){clearTimeout(t);});wTimers=[];words.forEach(function(w,i){var t=setTimeout(function(){document.querySelectorAll('.sw').forEach(function(el){el.classList.remove('hi');});var el=document.getElementById('sw'+i);if(el)el.classList.add('hi');},i*ms);wTimers.push(t);});if(window.speechSynthesis){window.speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(txt);u.rate=0.78;u.pitch=1.05;u.volume=1;u.onend=function(){document.querySelectorAll('.sw').forEach(function(el){el.classList.remove('hi');});setTimeout(function(){playScene(si,sc+1);},400);};window.speechSynthesis.speak(u);}}
+function stopStory(){wTimers.forEach(function(t){clearTimeout(t);});wTimers=[];if(window.speechSynthesis)window.speechSynthesis.cancel();document.querySelectorAll('.sw').forEach(function(el){el.classList.remove('hi');});document.getElementById('stPlay').classList.remove('playing');document.getElementById('stPlay').textContent='▶ Read to me!';}
+function finishStory(si){document.getElementById('stPlay').classList.remove('playing');document.getElementById('stPlay').textContent='✅ Done!';var s=STRS[si];document.getElementById('stQ').textContent=s.q;document.getElementById('stQBox').style.display='block';var el=document.getElementById('stOpts');el.innerHTML='';el.style.display='grid';s.o.forEach(function(o,i){var b=document.createElement('button');b.className='opt';b.style.fontSize='17px';b.textContent=o;b.onclick=function(){chkStory(i,s);};el.appendChild(b);});setTimeout(function(){say('Now answer this question. '+s.q,0.82,1.1);},600);}
+function chkStory(i,s){if(stDone)return;stDone=true;var btns=document.querySelectorAll('#stOpts .opt');var ok=i===s.a;btns[i].classList.add(ok?'ok':'no');if(!ok)btns[s.a].classList.add('ok');var msg=ok?'Amazing! You understood the story, Emma!':'Let us listen to the story again to find the answer!';document.getElementById('stFb').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'🎉 ':'')+msg+'</div>';say(msg,0.82,1.1);if(ok)addStar();document.getElementById('stNext').style.display='block';}
+function buildSciCats(){var el=document.getElementById('sciCats');el.innerHTML='';SCI_CATS.forEach(function(cat){var b=document.createElement('button');b.className='sci-cat'+(cat==='Animals'?' on':'');b.textContent=cat;b.onclick=function(){buildSciCards(cat);};el.appendChild(b);});}
+function buildSciCards(cat){document.querySelectorAll('.sci-cat').forEach(function(b){b.classList.toggle('on',b.textContent===cat);});var el=document.getElementById('sciCards');el.innerHTML='';SCI_DATA[cat].forEach(function(item){var c=document.createElement('div');c.className='sci-card';c.innerHTML='<div class="sci-emoji">'+item.e+'</div><div class="sci-name">'+item.n+'</div><div class="sci-fact">'+item.f+'</div><button class="sci-spk">🔊 Tell me about this!</button>';c.querySelector('.sci-spk').onclick=function(){say(item.spk,0.8,1.05);};c.onclick=function(ev){if(ev.target.tagName!=='BUTTON')say(item.spk,0.8,1.05);};el.appendChild(c);});document.getElementById('sciQWrap').style.display='block';sciQi=0;sciQscore=0;sciQdone=false;document.getElementById('sciQS').textContent='⭐ 0';rdrSciQ();setTimeout(function(){say('Tap any card to hear about it! Then try the quiz!',0.82,1.1);},400);}
+function rdrSciQ(){var q=SCI_QUIZ[sciQi%SCI_QUIZ.length];sciQdone=false;document.getElementById('sciQE').textContent=q.e;document.getElementById('sciQT').textContent=q.q;document.getElementById('sciQF').innerHTML='';document.getElementById('sciQN').style.display='none';var el=document.getElementById('sciQO');el.innerHTML='';q.o.forEach(function(o,i){var b=document.createElement('button');b.className='opt';b.style.fontSize='17px';b.textContent=o;b.onclick=function(){chkSciQ(i,q);};el.appendChild(b);});mkDots('sciQD',SCI_QUIZ.length,sciQi%SCI_QUIZ.length);setTimeout(function(){say(q.q+' Tap the right answer!',0.82,1.1);},300);}
+function chkSciQ(i,q){if(sciQdone)return;sciQdone=true;var btns=document.querySelectorAll('#sciQO .opt');var ok=i===q.a;btns[i].classList.add(ok?'ok':'no');if(!ok)btns[q.a].classList.add('ok');var msg=ok?'You are so smart! That is correct!':'The right answer is '+q.o[q.a]+'. Keep learning!';document.getElementById('sciQF').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'🎉 ':'')+msg+'</div>';say(msg,0.82,1.1);if(ok){sciQscore++;addStar();document.getElementById('sciQS').textContent='⭐ '+sciQscore;}document.getElementById('sciQN').style.display='block';}
+function startApp(){document.getElementById('splash').style.display='none';var a=document.getElementById('app');a.style.display='flex';a.style.flexDirection='column';buildLG();rdrP();rdrN();rdrW();buildStorySel();loadStory(0);buildSciCats();setTimeout(function(){say('Hi Emma! Welcome to your learning game! Tap a letter to start!',0.82,1.15);},500);}
+document.getElementById('startBtn').onclick=startApp;
+document.getElementById('nb-letters').onclick=function(){go('letters');};
+document.getElementById('nb-phonics').onclick=function(){go('phonics');};
+document.getElementById('nb-numbers').onclick=function(){go('numbers');};
+document.getElementById('nb-words').onclick=function(){go('words');};
+document.getElementById('nb-stories').onclick=function(){go('stories');};
+document.getElementById('nb-science').onclick=function(){go('science');};
+document.getElementById('sndNameBtn').onclick=function(){if(selL)say(selL.l,0.7,1.2);};
+document.getElementById('sndSoundBtn').onclick=function(){if(selL)say(selL.sound+'. Like the beginning of '+selL.w,0.75,1.1);};
+document.getElementById('stPlay').onclick=playStory;
+document.getElementById('stStop').onclick=stopStory;
+document.getElementById('stNext').onclick=function(){stopStory();selStory((curStory+1)%STRS.length);};
+document.getElementById('pn').onclick=function(){pi++;rdrP();};
+document.getElementById('nn').onclick=function(){ni++;rdrN();};
+document.getElementById('wn').onclick=function(){wi++;rdrW();};
+document.getElementById('sciQN').onclick=function(){sciQi++;rdrSciQ();};
+['letters','phonics','numbers','words','stories','science'].forEach(function(name){var el=document.getElementById('instr-'+name);if(el)el.onclick=function(){ri('instr-'+name);};});
 </script>
 </body>
 </html>
- 
