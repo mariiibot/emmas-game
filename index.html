@@ -10,148 +10,148 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;height:100vh;width:100vw;overflow:hidden;}
-
+ 
 #splash{position:fixed;inset:0;background:linear-gradient(160deg,#FFE4F3,#EDE9FE,#E0F2FE);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99;text-align:center;padding:20px;}
 #splash h1{font-size:44px;font-weight:900;color:#7C3AED;line-height:1.2;margin:16px 0 8px;}
 #splash h1 span{color:#FF6B9D;}
 #splash p{font-size:22px;color:#7C5C8A;font-weight:700;}
 #splash .emojis{font-size:40px;margin:20px 0;letter-spacing:6px;}
 #startBtn{margin-top:24px;padding:22px 60px;border-radius:60px;border:none;background:linear-gradient(135deg,#FF6B9D,#A855F7);color:#fff;font-size:24px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;box-shadow:0 8px 28px rgba(168,85,247,0.4);}
-
+ 
 #app{position:fixed;inset:0;flex-direction:column;display:none;}
-
+ 
 .topbar{background:linear-gradient(135deg,#7C3AED,#C94477);padding:12px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;padding-top:max(12px,env(safe-area-inset-top));}
 .topbar-title{font-size:18px;font-weight:900;color:#fff;}
 .stars-badge{background:rgba(255,255,255,0.25);border-radius:30px;padding:5px 14px;font-size:17px;font-weight:900;color:#fff;}
-
+ 
 .nav{display:flex;background:#fff;border-bottom:3px solid #EDE9FE;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
 .nav::-webkit-scrollbar{display:none;}
 .nb{flex:1;min-width:64px;padding:9px 3px 7px;border:none;background:none;font-family:-apple-system,sans-serif;font-size:10px;font-weight:800;color:#7C5C8A;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;border-bottom:4px solid transparent;margin-bottom:-3px;}
 .nb .ic{font-size:20px;}
 .nb.on{color:#7C3AED;border-bottom-color:#7C3AED;}
-
+ 
 .screens{flex:1;overflow:hidden;position:relative;}
 .sc{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px max(12px,env(safe-area-inset-bottom));display:none;}
 .sc.on{display:block;}
-
+ 
 .card{background:#fff;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 4px 16px rgba(168,85,247,0.1);border:2px solid #EDE9FE;}
-
+ 
 .instr{display:flex;align-items:center;gap:10px;background:#F5F0FF;border-radius:14px;padding:11px 14px;margin-bottom:12px;cursor:pointer;border:2px solid #DDD6FE;}
 .instr .ii{font-size:24px;flex-shrink:0;}
 .instr .it{font-size:16px;font-weight:800;color:#5B21B6;line-height:1.4;}
 .instr .is{font-size:18px;flex-shrink:0;}
-
+ 
 .lbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px;color:#7C5C8A;margin-bottom:10px;}
 .big{font-size:76px;text-align:center;line-height:1.1;padding:8px 0;}
-
+ 
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
 .opt{padding:18px 8px;border-radius:14px;border:3px solid #EDE9FE;font-size:20px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;min-height:70px;display:flex;align-items:center;justify-content:center;text-align:center;transition:transform 0.1s;user-select:none;}
 .opt:active{transform:scale(0.94);}
 .opt.ok{background:#D1FAE5;border-color:#059669;color:#065F46;}
 .opt.no{background:#FEE2E2;border-color:#DC2626;color:#991B1B;}
-
+ 
 .fb{border-radius:14px;padding:13px;margin-top:10px;text-align:center;font-size:17px;font-weight:800;cursor:pointer;line-height:1.4;}
 .fb.ok{background:#D1FAE5;color:#065F46;}
 .fb.no{background:#FEE2E2;color:#991B1B;}
-
+ 
 .nxt{width:100%;padding:16px;border-radius:50px;border:none;background:linear-gradient(135deg,#A855F7,#FF6B9D);color:#fff;font-size:19px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;margin-top:10px;box-shadow:0 6px 18px rgba(168,85,247,0.3);}
-
+ 
 .spkbtn{background:#FEF9C3;border:2px solid #FCD34D;border-radius:30px;padding:10px 18px;font-size:15px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;color:#92400E;display:inline-block;}
-
+ 
 .lgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
 .lt{aspect-ratio:1;border-radius:12px;border:3px solid #EDE9FE;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;background:#F5F0FF;color:#7C3AED;font-family:-apple-system,sans-serif;user-select:none;}
 .lt:active{transform:scale(0.9);}
 .lt.sel{background:#7C3AED;color:#fff;border-color:#5B21B6;}
-
+ 
 .ldet-chars{font-size:68px;font-weight:900;color:#7C3AED;text-align:center;margin-bottom:4px;}
 .ldet-emoji{font-size:52px;text-align:center;margin-bottom:6px;}
 .ldet-hint{font-size:19px;font-weight:700;color:#7C5C8A;text-align:center;margin-bottom:12px;}
-
+ 
 .sound-row{display:flex;gap:10px;margin-bottom:12px;}
 .snd-btn{flex:1;padding:13px 8px;border-radius:14px;border:3px solid #FCD34D;background:#FEF9C3;color:#92400E;font-size:15px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;text-align:center;}
 .snd-lbl{font-size:11px;font-weight:700;color:#B45309;margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;}
-
+ 
 .examples-lbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:#7C5C8A;margin-bottom:9px;}
 .ex-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px;}
 .ex-tile{background:#F5F0FF;border-radius:14px;border:2px solid #DDD6FE;padding:9px 5px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
 .ex-tile:active{transform:scale(0.94);}
 .ex-tile .exe{font-size:32px;}
 .ex-tile .exw{font-size:13px;font-weight:800;color:#5B21B6;text-align:center;}
-
+ 
 .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;}
 .rlbl{font-size:14px;font-weight:700;color:#7C5C8A;}
 .rval{font-size:19px;font-weight:900;color:#7C3AED;}
-
+ 
 .dots{display:flex;gap:6px;justify-content:center;margin-bottom:10px;flex-wrap:wrap;}
 .dot{width:10px;height:10px;border-radius:50%;background:#DDD6FE;}
 .dot.dn{background:#7C3AED;}
 .dot.cu{background:#FF6B9D;transform:scale(1.3);}
-
+ 
 /* ===== STORY SCREEN ===== */
 .story-selector{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:12px;}
 .story-selector::-webkit-scrollbar{display:none;}
 .story-tab{flex-shrink:0;padding:8px 16px;border-radius:20px;border:2px solid #DDD6FE;font-size:13px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;}
 .story-tab.on{background:#7C3AED;color:#fff;border-color:#5B21B6;}
-
+ 
 .story-book{background:#fff;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 4px 16px rgba(168,85,247,0.1);border:2px solid #EDE9FE;}
 .story-scene{font-size:72px;text-align:center;padding:10px 0 6px;line-height:1;}
 .story-title{font-size:22px;font-weight:900;color:#7C3AED;text-align:center;margin-bottom:14px;}
-
+ 
 .story-text-wrap{background:#FFF5FB;border-radius:14px;padding:14px;border-left:4px solid #FF6B9D;margin-bottom:12px;cursor:pointer;}
 .story-word{font-size:22px;font-weight:800;color:#2D1B4E;display:inline;cursor:pointer;}
 .story-word.hi{background:#FCD34D;border-radius:6px;padding:2px 4px;color:#92400E;}
 .story-word-space{font-size:22px;display:inline;}
-
+ 
 .story-controls{display:flex;gap:10px;margin-bottom:12px;}
 .ctrl-btn{flex:1;padding:13px 8px;border-radius:14px;border:2px solid #DDD6FE;font-size:15px;font-weight:900;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;text-align:center;}
 .ctrl-btn:active{transform:scale(0.95);}
 .ctrl-btn.playing{background:#7C3AED;color:#fff;border-color:#5B21B6;}
-
+ 
 .story-q-box{background:#FFF5FB;border-radius:14px;padding:14px;border:2px solid #FFD6E7;margin-bottom:8px;}
 .story-q-label{font-size:13px;font-weight:800;color:#BE185D;margin-bottom:5px;text-transform:uppercase;letter-spacing:1px;}
 .story-q-text{font-size:18px;font-weight:800;color:#2D1B4E;}
-
+ 
 /* ===== SCIENCE SCREEN ===== */
 .sci-cats{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:12px;}
 .sci-cats::-webkit-scrollbar{display:none;}
 .sci-cat{flex-shrink:0;padding:8px 16px;border-radius:20px;border:2px solid #DDD6FE;font-size:13px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;background:#F5F0FF;color:#7C3AED;}
 .sci-cat.on{background:#059669;color:#fff;border-color:#047857;}
-
+ 
 .sci-card{background:#fff;border-radius:18px;padding:14px;margin-bottom:10px;box-shadow:0 3px 12px rgba(5,150,105,0.1);border:2px solid #D1FAE5;cursor:pointer;}
 .sci-card:active{transform:scale(0.98);}
 .sci-emoji{font-size:52px;text-align:center;padding:6px 0;}
 .sci-name{font-size:20px;font-weight:900;color:#065F46;text-align:center;margin-bottom:4px;}
 .sci-fact{font-size:15px;font-weight:700;color:#374151;line-height:1.5;text-align:center;margin-bottom:10px;}
 .sci-spk{width:100%;padding:11px;border-radius:30px;border:none;background:#D1FAE5;color:#065F46;font-size:15px;font-weight:800;font-family:-apple-system,sans-serif;cursor:pointer;}
-
+ 
 .sci-quiz-wrap{background:#fff;border-radius:20px;padding:14px;margin-top:4px;box-shadow:0 4px 16px rgba(5,150,105,0.1);border:2px solid #D1FAE5;}
 </style>
 </head>
 <body>
-
+ 
 <div id="splash">
   <div style="font-size:76px;">🌟</div>
   <h1>Emma's<br><span>Learning Game</span></h1>
   <p>Let's learn and have fun!</p>
   <div class="emojis">🐶📚🌍🔢🎵🌿</div>
-  <button id="startBtn">▶ Let's Play!</button>
+  <button id="startBtn" onclick="startApp()">▶ Let's Play!</button>
 </div>
-
+ 
 <div id="app">
   <div class="topbar">
     <div class="topbar-title">Emma's Learning Game 🌟</div>
     <div class="stars-badge">⭐ <span id="sc">0</span></div>
   </div>
   <div class="nav">
-    <button class="nb on" id="nb-letters"><span class="ic">🔤</span>Letters</button>
-    <button class="nb" id="nb-phonics"><span class="ic">🔊</span>Phonics</button>
-    <button class="nb" id="nb-numbers"><span class="ic">🔢</span>Numbers</button>
-    <button class="nb" id="nb-words"><span class="ic">📖</span>Words</button>
-    <button class="nb" id="nb-stories"><span class="ic">📚</span>Stories</button>
-    <button class="nb" id="nb-science"><span class="ic">🌍</span>Science</button>
+    <button class="nb on" id="nb-letters" onclick="go('letters')"><span class="ic">🔤</span>Letters</button>
+    <button class="nb" id="nb-phonics" onclick="go('phonics')"><span class="ic">🔊</span>Phonics</button>
+    <button class="nb" id="nb-numbers" onclick="go('numbers')"><span class="ic">🔢</span>Numbers</button>
+    <button class="nb" id="nb-words" onclick="go('words')"><span class="ic">📖</span>Words</button>
+    <button class="nb" id="nb-stories" onclick="go('stories')"><span class="ic">📚</span>Stories</button>
+    <button class="nb" id="nb-science" onclick="go('science')"><span class="ic">🌍</span>Science</button>
   </div>
   <div class="screens">
-
+ 
     <!-- LETTERS -->
     <div id="s-letters" class="sc on">
       <div class="instr" id="instr-letters"><span class="ii">👆</span><span class="it">Tap any letter to learn it!</span><span class="is">🔊</span></div>
@@ -168,7 +168,7 @@ body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;heigh
         <div class="ex-grid" id="exGrid"></div>
       </div>
     </div>
-
+ 
     <!-- PHONICS -->
     <div id="s-phonics" class="sc">
       <div class="row"><span class="rlbl">Phonics Quiz</span><span class="rval" id="ps">⭐ 0</span></div>
@@ -181,7 +181,7 @@ body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;heigh
         <button class="nxt" id="pn" style="display:none;">Next ➡️</button>
       </div>
     </div>
-
+ 
     <!-- NUMBERS -->
     <div id="s-numbers" class="sc">
       <div class="row"><span class="rlbl">Counting Game</span><span class="rval" id="ns">⭐ 0</span></div>
@@ -194,7 +194,7 @@ body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;heigh
         <button class="nxt" id="nn" style="display:none;">Next ➡️</button>
       </div>
     </div>
-
+ 
     <!-- WORDS -->
     <div id="s-words" class="sc">
       <div class="row"><span class="rlbl">Sight Words</span><span class="rval" id="ws">⭐ 0</span></div>
@@ -207,7 +207,7 @@ body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;heigh
         <button class="nxt" id="wn" style="display:none;">Next ➡️</button>
       </div>
     </div>
-
+ 
     <!-- STORIES -->
     <div id="s-stories" class="sc">
       <div class="instr" id="instr-stories"><span class="ii">📖</span><span class="it">Pick a story! Then press Play to hear it!</span><span class="is">🔊</span></div>
@@ -229,7 +229,7 @@ body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;heigh
         <button class="nxt" id="storyNext" style="display:none;">Next Story ➡️</button>
       </div>
     </div>
-
+ 
     <!-- SCIENCE -->
     <div id="s-science" class="sc">
       <div class="instr" id="instr-science"><span class="ii">🔬</span><span class="it">Pick a topic! Tap any card to learn and hear about it!</span><span class="is">🔊</span></div>
@@ -246,10 +246,10 @@ body{font-family:-apple-system,sans-serif;background:#FFF0FA;color:#2D1B4E;heigh
         <button class="nxt" id="sciQNext" style="display:none;">Next ➡️</button>
       </div>
     </div>
-
+ 
   </div>
 </div>
-
+ 
 <script>
 // ===== LETTERS DATA =====
 var LETS=[
@@ -280,7 +280,7 @@ var LETS=[
   {l:'Y',lc:'y',sound:'YUH',e:'🪀',w:'Yo-yo',ex:[{e:'🧶',w:'Yarn'},{e:'😋',w:'Yummy'},{e:'🥛',w:'Yogurt'},{e:'🌿',w:'Yam'},{e:'⛵',w:'Yacht'},{e:'🌾',w:'Yellow'}]},
   {l:'Z',lc:'z',sound:'ZZZ',e:'🦓',w:'Zebra',ex:[{e:'⚡',w:'Zap'},{e:'🤐',w:'Zip'},{e:'🌿',w:'Zucchini'},{e:'0️⃣',w:'Zero'},{e:'🎯',w:'Zoom'},{e:'🏙️',w:'Zoo'}]}
 ];
-
+ 
 // ===== PHONICS =====
 var PHO=[
   {l:'A',s:'AH',o:['AH','EE','OH','UH'],a:0,ex:'Apple'},
@@ -296,7 +296,7 @@ var PHO=[
   {l:'T',s:'TUH',o:['DUH','BUH','TUH','KUH'],a:2,ex:'Tiger'},
   {l:'R',s:'RRR',o:['LLL','RRR','WWW','YYY'],a:1,ex:'Rain'}
 ];
-
+ 
 // ===== NUMBERS =====
 var NUMS=[
   {e:'⭐',n:1,o:[1,2,3,4]},
@@ -310,7 +310,7 @@ var NUMS=[
   {e:'⭐⭐⭐⭐⭐⭐⭐⭐⭐',n:9,o:[8,9,10,11]},
   {e:'🌷🌷🌷🌷🌷🌷🌷🌷🌷🌷',n:10,o:[9,10,11,12]}
 ];
-
+ 
 // ===== SIGHT WORDS =====
 var WDS=[
   {e:'🐶',w:'dog',o:['dog','cat','bird','fish']},
@@ -324,7 +324,7 @@ var WDS=[
   {e:'🌙',w:'moon',o:['star','moon','sun','sky']},
   {e:'🍎',w:'apple',o:['apple','grape','mango','peach']}
 ];
-
+ 
 // ===== STORIES =====
 // scenes: array of {emoji, text} — each scene has an emoji picture and a sentence
 var STORIES=[
@@ -413,7 +413,7 @@ var STORIES=[
     a:2
   }
 ];
-
+ 
 // ===== SCIENCE DATA =====
 var SCI_CATS=['Animals','Plants & Trees','Food','Planets','Earth','Our Body'];
 var SCI_DATA={
@@ -466,7 +466,7 @@ var SCI_DATA={
     {e:'💪',n:'Muscles',f:'Muscles help you move your body! When you exercise your muscles get stronger. Eating healthy food helps muscles grow!',spk:'Muscles are what help you move every part of your body. When you run, jump, and play you are exercising your muscles. The more you exercise and eat healthy food, the bigger and stronger your muscles will grow.'}
   ]
 };
-
+ 
 // Science quiz questions
 var SCI_QUIZ=[
   {e:'🐘',q:'Elephants drink water with their…',o:['Mouth','Trunk','Tail','Ears'],a:1},
@@ -482,7 +482,7 @@ var SCI_QUIZ=[
   {e:'🦋',q:'Before becoming a butterfly it is a…',o:['Baby bee','Caterpillar','Small bird','Worm'],a:1},
   {e:'☀️',q:'The Sun gives us light and…',o:['Rain','Snow','Warmth','Wind'],a:2}
 ];
-
+ 
 // ===== STATE =====
 var stars=0, selL=null;
 var pi=0,pscore=0,pdone=false;
@@ -492,7 +492,7 @@ var wi=0,wscore=0,wdone=false;
 var curStory=0, storyDone=false, storyTimer=null, wordTimers=[];
 // science
 var curSciCat='Animals', sciQi=0, sciQscore=0, sciQdone=false;
-
+ 
 // ===== SPEECH =====
 function sayIt(txt,rate,pitch,cb){
   try{
@@ -507,17 +507,17 @@ function sayIt(txt,rate,pitch,cb){
     window.speechSynthesis.speak(u);
   }catch(ex){}
 }
-
+ 
 function readInstr(id){
   var el=document.getElementById(id);
   if(el){var t=el.querySelector('.it');if(t)sayIt(t.textContent,0.82,1.1);}
 }
-
+ 
 function addStar(){
   stars++;
   document.getElementById('sc').textContent=stars;
 }
-
+ 
 function mkDots(id,tot,cur){
   var el=document.getElementById(id);if(!el)return;
   el.innerHTML='';
@@ -528,7 +528,7 @@ function mkDots(id,tot,cur){
     el.appendChild(d);
   }
 }
-
+ 
 // ===== NAV =====
 function go(name){
   document.querySelectorAll('.sc').forEach(function(s){s.classList.remove('on');});
@@ -539,7 +539,7 @@ function go(name){
   if(name==='stories')loadStory(curStory);
   if(name==='science')renderSciCat('Animals');
 }
-
+ 
 // ===== LETTERS =====
 function buildLG(){
   var g=document.getElementById('lgrid');g.innerHTML='';
@@ -552,7 +552,7 @@ function buildLG(){
     g.appendChild(b);
   });
 }
-
+ 
 function selLetter(e){
   selL=e;
   document.querySelectorAll('.lt').forEach(function(b){b.classList.toggle('sel',b.textContent===e.l);});
@@ -574,7 +574,7 @@ function selLetter(e){
   });
   sayIt(e.l+'. '+e.l+' is for '+e.w,0.8,1.15);
 }
-
+ 
 // ===== PHONICS =====
 function rdrP(){
   var q=PHO[pi%PHO.length];pdone=false;
@@ -606,7 +606,7 @@ function chkP(i,q){
   document.getElementById('pn').style.display='block';
 }
 function nxtP(){pi++;rdrP();}
-
+ 
 // ===== NUMBERS =====
 function rdrN(){
   var q=NUMS[ni%NUMS.length];ndone=false;
@@ -642,7 +642,7 @@ function chkN(val,q){
   document.getElementById('nn').style.display='block';
 }
 function nxtN(){ni++;rdrN();}
-
+ 
 // ===== WORDS =====
 function rdrW(){
   var q=WDS[wi%WDS.length];wdone=false;
@@ -677,7 +677,7 @@ function chkW(val,q){
   document.getElementById('wn').style.display='block';
 }
 function nxtW(){wi++;rdrW();}
-
+ 
 // ===== STORIES =====
 function buildStorySelector(){
   var sel=document.getElementById('storySelector');
@@ -693,14 +693,14 @@ function buildStorySelector(){
     sel.appendChild(b);
   });
 }
-
+ 
 function selectStory(idx){
   stopStory();
   curStory=idx;storyDone=false;
   document.querySelectorAll('.story-tab').forEach(function(b,i){b.classList.toggle('on',i===idx);});
   loadStory(idx);
 }
-
+ 
 function loadStory(idx){
   stopStory();
   storyDone=false;
@@ -718,9 +718,9 @@ function loadStory(idx){
   // build word spans for scene 0
   buildSceneText(idx,0);
 }
-
+ 
 var curScene=0;
-
+ 
 function showScene(storyIdx,sceneIdx){
   curScene=sceneIdx;
   var s=STORIES[storyIdx];
@@ -728,7 +728,7 @@ function showScene(storyIdx,sceneIdx){
   document.getElementById('storyScene').textContent=scene.e;
   buildSceneText(storyIdx,sceneIdx);
 }
-
+ 
 function buildSceneText(storyIdx,sceneIdx){
   var scene=STORIES[storyIdx].scenes[sceneIdx];
   var wrap=document.getElementById('storyTextWrap');
@@ -746,14 +746,14 @@ function buildSceneText(storyIdx,sceneIdx){
     }
   });
 }
-
+ 
 function playStory(){
   var s=STORIES[curStory];
   document.getElementById('storyPlayBtn').classList.add('playing');
   document.getElementById('storyPlayBtn').textContent='⏸ Reading...';
   playScene(curStory,0);
 }
-
+ 
 function playScene(storyIdx,sceneIdx){
   if(sceneIdx>=STORIES[storyIdx].scenes.length){
     // all scenes done — show question
@@ -769,7 +769,7 @@ function playScene(storyIdx,sceneIdx){
     setTimeout(function(){playScene(storyIdx,sceneIdx+1);},500);
   });
 }
-
+ 
 function highlightWords(text,onDone){
   clearWordTimers();
   var words=text.split(' ');
@@ -805,12 +805,12 @@ function highlightWords(text,onDone){
     wordTimers.push(fallback);
   }
 }
-
+ 
 function clearWordTimers(){
   wordTimers.forEach(function(t){clearTimeout(t);});
   wordTimers=[];
 }
-
+ 
 function stopStory(){
   clearWordTimers();
   if(window.speechSynthesis)window.speechSynthesis.cancel();
@@ -818,7 +818,7 @@ function stopStory(){
   document.getElementById('storyPlayBtn').classList.remove('playing');
   document.getElementById('storyPlayBtn').textContent='▶ Read to me!';
 }
-
+ 
 function onStoryScenesFinished(storyIdx){
   document.getElementById('storyPlayBtn').classList.remove('playing');
   document.getElementById('storyPlayBtn').textContent='✅ Done!';
@@ -841,7 +841,7 @@ function onStoryScenesFinished(storyIdx){
   // speak question
   setTimeout(function(){sayIt('Now answer this question. '+s.q,0.82,1.1);},600);
 }
-
+ 
 function chkStory(i,s){
   if(storyDone)return;storyDone=true;
   var btns=document.querySelectorAll('#storyOpts .opt');
@@ -854,7 +854,7 @@ function chkStory(i,s){
   if(ok)addStar();
   document.getElementById('storyNext').style.display='block';
 }
-
+ 
 // ===== SCIENCE =====
 function buildSciCats(){
   var el=document.getElementById('sciCats');el.innerHTML='';
@@ -869,7 +869,7 @@ function buildSciCats(){
     el.appendChild(b);
   });
 }
-
+ 
 function renderSciCat(cat){
   curSciCat=cat;
   document.querySelectorAll('.sci-cat').forEach(function(b){b.classList.toggle('on',b.textContent===cat);});
@@ -899,7 +899,7 @@ function renderSciCat(cat){
   renderSciQ();
   setTimeout(function(){sayIt('Pick any card and tap it to hear about it! Then try the quiz!',0.82,1.1);},400);
 }
-
+ 
 function renderSciQ(){
   var q=SCI_QUIZ[sciQi%SCI_QUIZ.length];sciQdone=false;
   document.getElementById('sciQEmoji').textContent=q.e;
@@ -918,7 +918,7 @@ function renderSciQ(){
   mkDots('sciQDots',SCI_QUIZ.length,sciQi%SCI_QUIZ.length);
   setTimeout(function(){sayIt(q.q+' Tap the right answer!',0.82,1.1);},300);
 }
-
+ 
 function chkSciQ(i,q){
   if(sciQdone)return;sciQdone=true;
   var btns=document.querySelectorAll('#sciQOpts .opt');
@@ -931,18 +931,18 @@ function chkSciQ(i,q){
   if(ok){sciQscore++;addStar();document.getElementById('sciQScore').textContent='⭐ '+sciQscore;}
   document.getElementById('sciQNext').style.display='block';
 }
-
+ 
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded',function(){
-
+ 
   document.getElementById('startBtn').addEventListener('touchend',function(ev){ev.preventDefault();startApp();},false);
   document.getElementById('startBtn').addEventListener('click',function(){startApp();});
-
+ 
   // nav
   ['letters','phonics','numbers','words','stories','science'].forEach(function(name){
     document.getElementById('nb-'+name).addEventListener('click',function(){go(name);});
   });
-
+ 
   // instruction banners tap to re-read
   ['letters','phonics','numbers','words','stories','science'].forEach(function(name){
     var el=document.getElementById('instr-'+name);
@@ -951,13 +951,13 @@ window.addEventListener('DOMContentLoaded',function(){
       el.addEventListener('click',function(){readInstr('instr-'+name);});
     }
   });
-
+ 
   // letter sound buttons
   document.getElementById('sndNameBtn').addEventListener('touchend',function(ev){ev.preventDefault();if(selL)sayIt(selL.l,0.7,1.2);},false);
   document.getElementById('sndNameBtn').addEventListener('click',function(){if(selL)sayIt(selL.l,0.7,1.2);});
   document.getElementById('sndSoundBtn').addEventListener('touchend',function(ev){ev.preventDefault();if(selL)sayIt(selL.sound+'. Like the beginning of '+selL.w,0.75,1.1);},false);
   document.getElementById('sndSoundBtn').addEventListener('click',function(){if(selL)sayIt(selL.sound+'. Like the beginning of '+selL.w,0.75,1.1);});
-
+ 
   // story buttons
   document.getElementById('storyPlayBtn').addEventListener('touchend',function(ev){ev.preventDefault();playStory();},false);
   document.getElementById('storyPlayBtn').addEventListener('click',function(){playStory();});
@@ -969,14 +969,14 @@ window.addEventListener('DOMContentLoaded',function(){
     selectStory(next);
     document.getElementById('storyNext').style.display='none';
   });
-
+ 
   // phonics / numbers / words next
   document.getElementById('pn').addEventListener('click',function(){nxtP();});
   document.getElementById('nn').addEventListener('click',function(){nxtN();});
   document.getElementById('wn').addEventListener('click',function(){nxtW();});
   document.getElementById('sciQNext').addEventListener('click',function(){sciQi++;renderSciQ();});
 });
-
+ 
 function startApp(){
   document.getElementById('splash').style.display='none';
   var a=document.getElementById('app');
@@ -990,3 +990,4 @@ function startApp(){
 </script>
 </body>
 </html>
+ 
